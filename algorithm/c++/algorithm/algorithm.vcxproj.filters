@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="sort">
+      <UniqueIdentifier>{aca084b9-6a8f-4493-99f2-0d8f8175695f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="maxpriority">
+      <UniqueIdentifier>{ecbc7fef-5123-4aa7-a394-3808b255a753}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="framework">
+      <UniqueIdentifier>{fecbb64c-442f-450b-b372-5a03fa1b880c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="sort\sort.h">
+      <Filter>sort</Filter>
+    </ClInclude>
+    <ClInclude Include="maxpriority\maxpriority.h">
+      <Filter>maxpriority</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>framework</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>

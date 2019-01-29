@@ -1,0 +1,40 @@
+
+<!--行为节点  type是选择动作或释放技能 subtype是hit，skill，super，change，teamskill，other等，skillid是选择的技能id，默认是0-->
+<action type = "select" subtype = "hit" skillid = "0" name = "action hit1"/>
+<!--行为节点 执行-->
+<action type = "exec" name = "exec action"/>
+<!--安全行为节点 -->
+<action type = "safe" name = "safe"/>
+<!--条件节点 不同类型参数不同 -->
+<!--hp类型 camp阵营，param是percent或num，operator是运算符，num是要比较的数值 self表示是否与自己的数值比较-->
+<condition type = "hp" camp = "0" param = "percent" operator = "==" num = "100" self = "0" name = "condition hp1"/>
+<!--attr类型 have表示有没有某种属性 0是没有，1是有 -->
+<condition type = "attr" have = "0" attrid = "1" name = "condition attr1"/>
+<!--numeric类型 camp阵营，param是attack,def,cri,domage,speed等，operator是运算符，num是要比较的数值  self表示是否与自己的数值比较-->
+<condition type = "numeric" camp = "0" param = "attack" operator = "==" num = "100" self = "0" name = "conditioni numeric1" />
+<!--energy类型 -->
+<condition type = "energy" operator = "==" num = "0" name = "condition energy1"/>
+<!--rage类型-->
+<condition type = "rage" camp = "0" operator = "==" num = "0" name = "condition rage1"/>
+<!--prob类型-->
+<condition type = "prob" num = "0" name = "condition prob"/>
+<!--序列，与关系-->
+<sequence name = "sequence 1">
+    <condition type = "energy" operator = "==" num = "0" name = "condition"/>
+    <condition type = "rage" camp = "0" operator = "==" num = "0" name = "condition"/>
+    <action type = "hit" skillid = "0" name = "condition"/>
+</sequence>
+<!--选择，或关系-->
+<select name = "select">
+    <condition type = "energy" operator = "==" num = "0" name = "condition energy"/>
+    <condition type = "rage" camp = "0" operator = "==" num = "0" name = "condition rage"/>
+    <action type = "hit" skillid = "0" name = "action hit"/>
+</select>
+<!--循环 选择目标用-->
+<loop camp = "0" name = "loop">
+    <sequence name = "sequence">
+        <condition type = "energy" operator = "==" num = "0" name = "condition"/>
+        <condition type = "rage" camp = "0" operator = "==" num = "0" name = "rage"/>
+        <action type = "hit" skillid = "0" name = "action"/>
+    </sequence>
+</loop>
