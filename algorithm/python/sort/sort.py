@@ -88,49 +88,42 @@ class CSort:
             self.nums[i] = self.nums[0]
             self.nums[0] = tmp
             self.heap_arrange(0, i)
-        
-    def partition(self, p, r):
-        key = self.nums[r]
-        mid = p - 1
-        iter_ = p
-        while iter_ < r:
-            if self.nums[iter_] < key:
-                mid += 1
-                if mid != iter_:
-                    temp = self.nums[iter_]
-                    self.nums[iter_] = self.nums[mid]
-                    self.nums[mid] = temp
-            iter_ += 1
-        self.nums[r] = self.nums[mid + 1]
-        self.nums[mid + 1] = key
-        return mid + 1
-
-    def partition2(self, p, r):
-        key = self.nums[r]
-        li = p
-        ri = r
-        while ri > li:
-            if self.nums[ri] < key:
-                while li < ri:
-                    if self.nums[li] > key:
-                        temp = self.nums[li]
-                        self.nums[li] = self.nums[ri]
-                        self.nums[ri] = temp
-                        li = li + 1
-                        break
-                    li = li + 1
-            ri = ri - 1  
-        self.nums[r] = self.nums[li]
-        self.nums[li] = key
-        return li
 
     def quick_sort(self, p, r):
         if p >= r:
             return
-        q = self.partition2(p, r)
+        q = self.partition4(p, r)
         self.quick_sort(p, q - 1)
         self.quick_sort(q + 1, r)
 
+    def partition3(self, begin, end):
+        key = self.nums[end]
+        leftindex = begin
+        rightindex = end - 1
+        while rightindex > leftindex:
+            if self.nums[rightindex] < key:
+                while leftindex < rightindex:
+                    if self.nums[leftindex] > key:
+                        self.nums[leftindex], self.nums[rightindex] = self.nums[rightindex], self.nums[leftindex]
+                        leftindex = leftindex + 1
+                        break
+                    leftindex = leftindex + 1
+            rightindex = rightindex - 1
+        self.nums[end], self.nums[leftindex] = self.nums[leftindex], key
+        return leftindex
+
+    def partition4(self, begin, end):
+        key = self.nums[end]
+        mid = begin - 1
+        quick = begin
+        while quick < end:
+            if self.nums[quick] < key:
+                mid += 1
+                if mid != quick:
+                    self.nums[mid], self.nums[quick] = self.nums[quick], self.nums[mid]
+            quick += 1
+        self.nums[end], self.nums[mid + 1] = self.nums[mid + 1], key
+        return mid + 1
 
 if __name__ == "__main__":
     nums = [8, 6, 10, 4, 1]

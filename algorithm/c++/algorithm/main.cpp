@@ -5,10 +5,12 @@
 #include <stdio.h>
 #include "sort\sort.h"
 #include "maxpriority\maxpriority.h"
+#include "skiplist\skiplist.h"
+
 int main(int argc, char* argv[])
 {
 	//test sort
-#if 1
+#if 0
 	std::array<int, 5> aNums = { 8, 6, 10, 4, 1 };
 	CSort<5> cc(aNums);
 	//cc.InsertSort();
@@ -34,8 +36,15 @@ int main(int argc, char* argv[])
 
 #endif // 0
 	
-#if 0
-
+	//test skiplist
+#if 1
+	SkipList skiplist;
+	skiplist.CreateList();
+	assert(skiplist.FindNode(1) == nullptr);
+	skiplist.InsertNode(1);
+	assert(skiplist.FindNode(1));
+	skiplist.DeleteNode(1);
+	assert(skiplist.FindNode(1) == nullptr);
 #endif // 0
 
 	system("pause");

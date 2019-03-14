@@ -10,6 +10,9 @@
     <Filter Include="framework">
       <UniqueIdentifier>{fecbb64c-442f-450b-b372-5a03fa1b880c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="skiplist">
+      <UniqueIdentifier>{3e737ace-48ff-402b-a66a-e4a0491959cc}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sort\sort.h">
@@ -17,6 +20,9 @@
     </ClInclude>
     <ClInclude Include="maxpriority\maxpriority.h">
       <Filter>maxpriority</Filter>
+    </ClInclude>
+    <ClInclude Include="skiplist\skiplist.h">
+      <Filter>skiplist</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
