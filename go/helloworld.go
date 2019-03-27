@@ -90,10 +90,15 @@ func (tt t) fibonacci() func() int {
 		return a
 	}
 }
+
+type Int int
+
+func (v *Int) pp() {
+	fmt.Println(*v)
+}
 func main() {
-	tt := t{b: 1}
-	f := tt.fibonacci()
-	for i := 0; i < 10; i++ {
-		fmt.Println(f())
-	}
+	var v Int
+
+	v = 1
+	v.pp()
 }

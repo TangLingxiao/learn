@@ -39,11 +39,9 @@ Debug/
 obj/
 bin/
 articles/
-<<<<<<< HEAD
 data/
-=======
 article/
->>>>>>> 950d9411cf5451b68c688ca461117e3feb1082c2
 __pycache__/
 *.pyc
 *~
+x64/
