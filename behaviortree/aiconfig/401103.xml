@@ -1,0 +1,32 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<select name="root">
+	<sequence name="AI">
+		<select name="SelectAction">
+			<sequence name="4">
+				<condition name="round31" type="round" operator="&lt;=" num="1" />
+				<action name="hit4" type="hit" skillid="0" />
+				<select name="SelectTarget4">
+					<sequence name="41">
+						<condition name="f41" type="select_hp" range="max" param="num" operator="==" num="0" camp="1" />
+					</sequence>
+					<condition name="s42" type="select_state" param="burying" have="0" camp="1" />
+					<condition name="p4" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="5">
+				<condition name="round32" type="round" operator="&gt;=" num="2" />
+				<action name="hit5" type="hit" skillid="0" />
+				<select name="SelectTarget5">
+					<sequence name="51">
+						<condition name="f51" type="select_hp" range="min" param="num" operator="==" num="0" camp="1" />
+						<condition name="s51" type="select_state" param="burying" have="0" camp="1" />
+					</sequence>
+					<condition name="s52" type="select_state" param="burying" have="0" camp="1" />
+					<condition name="p5" type="select_prob" num="100" />
+				</select>
+			</sequence>
+		</select>
+		<action name="cast" type="exec" skillid="0" />
+	</sequence>
+	<action name="safe" type="safe" skillid="0" />
+</select>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<select name="root">
+	<sequence name="AI">
+		<select name="SelectAction">
+			<sequence name="1">
+				<condition name="round" type="round" operator="&lt;=" num="1" />
+				<action name="hit1" type="hit" skillid="0" />
+				<select name="SelectTarget1">
+					<sequence name="13">
+						<condition name="13fighter" type="select_fighter" select="1" camp="1" heroid="1007" />
+					</sequence>
+					<condition name="p1" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="2">
+				<condition name="round2" type="round" operator="&gt;=" num="2" />
+				<action name="super1" type="super" skillid="0" />
+				<select name="SelectTarget2">
+					<condition name="P2" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="3">
+				<condition name="round3" type="round" operator="&gt;" num="2" />
+				<action name="skill1" type="skill" skillid="0" />
+				<select name="SelectTarget3">
+					<sequence name="31">
+						<condition name="f31" type="select_hp" range="min" param="num" operator="&gt;=" num="0" camp="1" />
+						<condition name="s31" type="select_state" param="burying" have="0" camp="1" />
+					</sequence>
+					<sequence name="32">
+						<condition name="s32" type="select_state" param="burying" have="0" camp="1" />
+					</sequence>
+					<condition name="p3" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="6">
+				<condition name="round33" type="round" operator="&gt;" num="2" />
+				<action name="hit" type="hit" skillid="0" />
+				<select name="SelectTarget6">
+					<sequence name="61">
+						<condition name="f61" type="select_hp" range="min" param="num" operator="==" num="0" camp="1" />
+						<condition name="s61" type="select_state" param="burying" have="0" camp="1" />
+					</sequence>
+					<sequence name="62">
+						<condition name="s62" type="select_state" param="burying" have="0" camp="1" />
+					</sequence>
+					<condition name="p6" type="select_prob" num="100" />
+				</select>
+			</sequence>
+		</select>
+		<action name="cast" type="exec" skillid="0" />
+	</sequence>
+	<action name="safe" type="safe" skillid="0" />
+</select>

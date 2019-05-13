@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<select name="root">
+	<sequence name="AI">
+		<select name="SelectAction">
+			<sequence name="1">
+				<condition name="round" type="round" operator="&lt;=" num="1" />
+				<action name="super1" type="hit" skillid="0" />
+				<select name="SelectTarget1">
+					<condition name="p1" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="2">
+				<condition name="round2" type="round" operator="&gt;=" num="2" />
+				<action name="super1" type="skill" skillid="0" />
+				<select name="SelectTarget1">
+					<condition name="p1" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="3">
+				<condition name="round3" type="round" operator="&gt;=" num="0" />
+				<action name="hit" type="hit" skillid="0" />
+				<select name="SelectTarget3">
+					<condition name="p3" type="select_prob" num="100" />
+				</select>
+			</sequence>
+		</select>
+		<action name="cast" type="exec" skillid="0" />
+	</sequence>
+	<action name="safe" type="safe" skillid="0" />
+</select>

@@ -1,0 +1,58 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<select name="root">
+	<sequence name="AI_201019">
+		<select name="SelectAction_201019">
+			<sequence name="hit_201019">
+				<condition name="con1_r_201019" type="round" operator="&lt;=" num="1" />
+				<condition name="con2_p_201019" type="prob" num="50" />
+				<action name="act_h_201019" type="hit" skillid="0" />
+				<select name="st1_201019">
+					<condition name="st1_p_100" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="skill_201019">
+				<condition name="con3_r_201019" type="round" operator="&lt;=" num="1" />
+				<condition name="con4_p_201019" type="prob" num="100" />
+				<action name="act_k_201019" type="skill" skillid="0" />
+				<condition name="st2_p_100" type="select_prob" num="100" />
+			</sequence>
+			<sequence name="super_201019">
+				<condition name="con5_r_201019" type="round" operator="==" num="2" />
+				<condition name="con6_p_201019" type="prob" num="80" />
+				<action name="act_s_201019" type="super" skillid="0" />
+				<condition name="st3_p_100" type="select_prob" num="100" />
+			</sequence>
+			<sequence name="skill2_201019">
+				<condition name="con7_r_201019" type="round" operator="==" num="2" />
+				<condition name="con8_p_201019" type="prob" num="50" />
+				<action name="act_k2_201019" type="skill" skillid="0" />
+				<condition name="st4_p_100" type="select_prob" num="100" />
+			</sequence>
+			<sequence name="hit2_201019">
+				<condition name="con9_r_201019" type="round" operator="==" num="3" />
+				<action name="act_h3_201019" type="hit" skillid="0" />
+				<condition name="st5_p_100" type="select_prob" num="100" />
+			</sequence>
+			<sequence name="hit3_201019">
+				<condition name="con10_r_201019" type="round" operator="&gt;=" num="4" />
+				<condition name="con11_p_201019" type="prob" num="40" />
+				<action name="act_h4_201019" type="hit" skillid="0" />
+				<condition name="st6_p_100" type="select_prob" num="100" />
+			</sequence>
+			<sequence name="skill3_201019">
+				<condition name="con12_r_201019" type="round" operator="&gt;=" num="4" />
+				<condition name="con13_p_201019" type="prob" num="50" />
+				<action name="act_k4_201019" type="skill" skillid="0" />
+				<condition name="st7_p_100" type="select_prob" num="100" />
+			</sequence>
+			<sequence name="super3_201019">
+				<condition name="con14_r_201019" type="round" operator="&gt;=" num="4" />
+				<condition name="con15_p_201019" type="prob" num="100" />
+				<action name="act_s4_201019" type="super" skillid="0" />
+				<condition name="st8_p_100" type="select_prob" num="100" />
+			</sequence>
+		</select>
+		<action name="cast_201019" type="exec" skillid="0" />
+	</sequence>
+	<action name="safe_201019" type="safe" skillid="0" />
+</select>

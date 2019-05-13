@@ -93,12 +93,40 @@ func (tt t) fibonacci() func() int {
 
 type Int int
 
+const wang, shi = "wang", 1
+
 func (v *Int) pp() {
 	fmt.Println(*v)
 }
-func main() {
-	var v Int
 
-	v = 1
-	v.pp()
+const (
+	a = iota
+	b
+	c
+)
+
+func swap(a, b *int) {
+	var temp int
+	temp = *a
+	*a = *b
+	*b = temp
+}
+
+func sum(s []int, c chan int) {
+	sum := 0
+	for _, num := range s {
+		sum += num
+	}
+	c <- sum
+}
+func main() {
+	s := []int{1, 2, 3, 4, 5}
+	c := make(chan int)
+
+	var m map[int]int
+	m = make(map[int]int)
+	m[1] = 2
+	go sum(s, c)
+	x := <-c
+	fmt.Printf("%d %v", x, m[1])
 }

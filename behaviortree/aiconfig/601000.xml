@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<select name="root">
+	<sequence name="AI">
+		<select name="SelectAction_601000">
+			<sequence name="hit_601000">
+				<condition name="con1_h_601000" type="prob" num="100" />
+				<action name="act_hit_601000" type="hit" skillid="0" />
+				<select name="SelectTarget_hit_601000">
+					<condition name="st1_h_p100" type="select_prob" num="100" />
+				</select>
+			</sequence>
+		</select>
+		<action name="cast_601000" type="exec" skillid="0" />
+	</sequence>
+	<action name="safe_601000" type="safe" skillid="0" />
+</select>

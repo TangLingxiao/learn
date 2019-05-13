@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<select name="root">
+	<sequence name="AI">
+		<select name="SelectAction">
+			<sequence name="1">
+				<sequence name="aa">
+					<condition name="hp111111" type="hp" param="num" operator="&lt;=" num="600" camp="0" self="0" />
+					<condition name="f111111" type="fighter" param="id" operator="==" num="1009" camp="0" self="0" />
+				</sequence>
+				<sequence name="bb">
+					<condition name="hp111222" type="hp" param="num" operator="&lt;=" num="600" camp="0" self="0" />
+					<condition name="f111222" type="fighter" param="id" operator="==" num="1013" camp="0" self="0" />
+				</sequence>
+				<action name="super1" type="super" skillid="0" />
+				<select name="SelectTarget1">
+					<condition name="p1" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="2">
+				<condition name="round2" type="round" operator="&gt;=" num="0" />
+				<action name="skill1" type="skill" skillid="0" />
+				<select name="SelectTarget2">
+					<sequence name="23">
+						<condition name="f23" type="select_fighter" select="1" camp="1" heroid="1009" />
+					</sequence>
+					<condition name="P2" type="select_prob" num="100" />
+				</select>
+			</sequence>
+			<sequence name="3">
+				<condition name="round3" type="round" operator="&gt;=" num="0" />
+				<action name="hit" type="hit" skillid="0" />
+				<select name="SelectTarget3">
+					<sequence name="33">
+						<condition name="f33" type="select_fighter" select="1" camp="1" heroid="1009" />
+					</sequence>
+					<condition name="p3" type="select_prob" num="100" />
+				</select>
+			</sequence>
+		</select>
+		<action name="cast" type="exec" skillid="0" />
+	</sequence>
+	<action name="safe" type="safe" skillid="0" />
+</select>

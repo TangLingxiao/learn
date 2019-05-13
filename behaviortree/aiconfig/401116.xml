@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<select name="root">
+	<sequence name="AI">
+		<select name="SelectAction">
+			<sequence name="1">
+				<condition name="round" type="round" operator="&gt;=" num="0" />
+				<action name="super1" type="hit" skillid="0" />
+				<select name="SelectTarget1">
+                                        <condition name="f21" type="select_fighter" select="1" camp="1" heroid="1008" />
+					<condition name="p1" type="select_prob" num="100" />
+				</select>
+			</sequence>
+		</select>
+		<action name="cast" type="exec" skillid="0" />
+	</sequence>
+	<action name="safe" type="safe" skillid="0" />
+</select>
