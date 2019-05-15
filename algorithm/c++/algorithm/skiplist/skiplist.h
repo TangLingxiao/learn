@@ -1,135 +1,64 @@
-#ifndef SKIP_LIST
-#define SKIP_LIST
-#include <random>
+#ifndef _SKIP_LIST_H_
+#define _SKIP_LIST_H_
 #include <iostream>
-#define MAX_LEVLE (16)
-#define RANDOM_P (0.25)
+#include <vector>
+//#include "type.h"
+#define SKIPLIST_MAXLEVEL (32)
+#define SKIPLIST_P (0.25)
 
-struct SkipListNode {
-	int data = 0;
-	SkipListNode* backward = nullptr;
-	struct SkipListLevel {
-		struct SkipListNode *forward = nullptr;
-	}level[];
+using uint64 = unsigned long long;
+using int32 = int;
+struct SSkipListNode
+{
+	struct SSkipListLevel
+	{
+		SSkipListNode* pForward = nullptr;
+		int32 nSpan = 0;//与下一个节点的跨度,计算排名
+	};
+	SSkipListLevel* pLevel = nullptr;
+	SSkipListNode* pBackward = nullptr;
+
+	uint64 nKey = 0;
+	int32 nScore = 0;
 };
 
-class SkipList
+class CSkipList
 {
 public:
-	~SkipList() {
-		while(tail){
-			SkipListNode* node = tail;
-			tail = tail->backward;
-			delete[](char*)node;
-		}
+	CSkipList() = default;
+	~CSkipList()
+	{
+		_ReleaseList();
 	}
-
-	SkipList *CreateList() {
-		head = CreateNode(MAX_LEVLE, 0);
-		level = 1;
-		return this;
-	}
-
-	int RandomLevel() {
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		std::binomial_distribution<> d(MAX_LEVLE, RANDOM_P);
-		return d(gen);
-	}
-
-
-	void InsertNode(int data) {
-		SkipListNode* update[MAX_LEVLE];
-		SkipListNode* node = head;
-		for (int i = level - 1; i >= 0; --i) {
-			while (node->level[i].forward && node->level[i].forward->data <= data) {
-				node = node->level[i].forward;
-			}
-			update[i] = node;
-		}
-
-		int randomlevel = RandomLevel();
-
-		if (randomlevel > level) {
-			for (int i = level; i < randomlevel; ++i) {
-				update[i] = head;
-			}
-			level = randomlevel;
-		}
-
-		SkipListNode* newnode = CreateNode(randomlevel, data);
-		for (int i = 0; i < level; ++i) {
-			newnode->level[i].forward = update[i]->level[i].forward;
-			update[i]->level[i].forward = newnode;
-		}
-
-		newnode->backward = update[0] == head ? nullptr : update[0];
-
-		if (newnode->level[0].forward) {
-			newnode->level[0].forward->backward = newnode;
-		}
-		else {
-			tail = newnode->level[0].forward;
-		}
-	}
-
-	void DeleteNode(int data) {
-		SkipListNode* update[MAX_LEVLE];
-		SkipListNode* node = head;
-		for (int i = level - 1; i >= 0; --i) {
-			while (node->level[i].forward && node->level[i].forward->data < data) {
-				node = node->level[i].forward;
-			}
-			update[i] = node;
-		}
-		node = node->level[0].forward;
-		if (node && node->data == data) {
-			for (int i = 0; i < level; ++i) {
-				if (update[i]->level[i].forward == node) {
-					update[i]->level[i].forward = node->level[i].forward;
-				}
-			}
-			if (node->level[0].forward) {
-				node->level[0].forward->backward = node->backward;
-			}
-			else {
-				tail = node->backward;
-			}
-			while (level > 1 && head->level[level - 1].forward == nullptr) {
-				level--;
-			}
-			delete [](char*)node;
-		}
-	}
-
-	SkipListNode* FindNode(int data) {
-		SkipListNode* node = head;
-		
-		for (int i = level - 1; i >= 0; --i) {
-			while (node->level[i].forward&&node->level[i].forward->data <= data) {
-				node = node->level[i].forward;
-			}
-		}
-		if (node->data == data) {
-			return node;
-		}
-		return nullptr;
-	}
-protected:
-	SkipListNode *CreateNode(int level, int data) {
-		SkipListNode* node = (SkipListNode*)new char[sizeof(SkipListNode) + level * sizeof(SkipListNode::SkipListLevel)];
-		node->data = data;
-		node->backward = nullptr;
-		for (int i = 0; i < level; ++i)
-		{
-			node->level[i].forward = nullptr;
-		}
-		return node;
-	}
+	CSkipList(CSkipList&) = delete;
+	CSkipList& operator=(CSkipList&) = delete;
+	CSkipList* CreateList();
+	SSkipListNode* Insert(uint64 nkey, int32 nScore);
+	bool Delete(int32 nScore, uint64 nkey);
+	SSkipListNode *GetElementByRank(int32 nRank);//1-based
+	void PopBack(uint64 & nKey);
+	void GetElementsByRank(int32 nBegin, int32 nEnd, std::vector<SSkipListNode*> &vecResult);
+	int32 GetLength();
+	int32 GetSize();
+	int32 GetLevel();
+public:
+	void DumpAll();
 
 private:
-	SkipListNode *head = nullptr, *tail = nullptr;
-	int level = 0;
+	SSkipListNode* _CreateNode(int32 nLevel, uint64 nKey, int32 nScore);
+	void _ReleaseNode(SSkipListNode* pNode);
 	
+	void _ReleaseList();
+
+	int _GetRandLevel();
+	void _DeleteNode(SSkipListNode* pNode, SSkipListNode** update);
+private:
+	int32 m_nLevel = 1;
+	int32 m_nLength = 0;
+	SSkipListNode* m_pHeader = nullptr;//哨兵
+	SSkipListNode* m_pTail = nullptr;
+	int32 m_nSize = 0;
 };
+
+
 #endif

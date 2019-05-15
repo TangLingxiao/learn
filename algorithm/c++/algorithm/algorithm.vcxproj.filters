@@ -29,5 +29,8 @@
     <ClCompile Include="main.cpp">
       <Filter>framework</Filter>
     </ClCompile>
+    <ClCompile Include="skiplist\skiplist.cpp">
+      <Filter>skiplist</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
