@@ -149,7 +149,10 @@ bool CSkipList::Delete(int32 nScore, uint64 nkey)
 	auto* pNode = m_pHeader;
 	for (int i = m_nLevel - 1; i >= 0; --i)
 	{
-		while (pNode->pLevel[i].pForward && pNode->pLevel[i].pForward->nScore <= nkey)
+		while (pNode->pLevel[i].pForward && 
+			(pNode->pLevel[i].pForward->nScore > nScore ||
+				(pNode->pLevel[i].pForward->nScore == nScore &&
+					pNode->pLevel[i].pForward->nKey != nkey)))
 		{
 			pNode = pNode->pLevel[i].pForward;
 		}
@@ -163,6 +166,30 @@ bool CSkipList::Delete(int32 nScore, uint64 nkey)
 		return true;
 	}
 	return false;
+}
+
+int32 CSkipList::GetRank(int32 nScore, uint64 nkey)
+{
+	int32 nTraversed = 0;
+	auto* pNode = m_pHeader;
+	for (int i = m_nLevel - 1; i >= 0; --i)
+	{
+		while (pNode->pLevel[i].pForward &&
+			(pNode->pLevel[i].pForward->nScore > nScore ||
+			(pNode->pLevel[i].pForward->nScore == nScore &&
+				pNode->pLevel[i].pForward->nKey != nkey)))
+		{
+			nTraversed += pNode->pLevel[i].nSpan;
+			pNode = pNode->pLevel[i].pForward;
+		}
+	}
+	nTraversed++;
+	pNode = pNode->pLevel[0].pForward;
+	if (pNode && pNode->nScore == nScore && pNode->nKey == nkey)//score可能会相同
+	{
+		return nTraversed;
+	}
+	return 0;
 }
 
 SSkipListNode * CSkipList::GetElementByRank(int32 nRank)
@@ -186,23 +213,8 @@ SSkipListNode * CSkipList::GetElementByRank(int32 nRank)
 
 void CSkipList::PopBack(uint64 & nKey)
 {
-	SSkipListNode* update[SKIPLIST_MAXLEVEL];
-	auto* pNode = m_pHeader;
-	for (int i = m_nLevel - 1; i >= 0; --i)
-	{
-		while (pNode->pLevel[i].pForward && pNode->pLevel[i].pForward != m_pTail)
-		{
-			pNode = pNode->pLevel[i].pForward;
-		}
-		update[i] = pNode;
-	}
-	pNode = m_pTail;
-	if (pNode)
-	{
-		nKey = pNode->nKey;
-		_DeleteNode(pNode, update);
-		_ReleaseNode(pNode);
-	}
+	nKey = m_pTail->nKey;
+	Delete(m_pTail->nScore, m_pTail->nKey);
 }
 
 void CSkipList::GetElementsByRank(int32 nBegin, int32 nEnd, std::vector<SSkipListNode*>& vecResult)
@@ -240,16 +252,5 @@ int32 CSkipList::GetSize()
 int32 CSkipList::GetLevel()
 {
 	return m_nLevel;
-}
-
-void CSkipList::DumpAll()
-{
-	auto* p = m_pHeader;
-	while (p->pLevel[0].pForward)
-	{
-		p = p->pLevel[0].pForward;
-		std::cout << "key: " << p->nKey << " score: " << p->nScore << " spin: " << p->pLevel[0].nSpan << std::endl;
-	}
-	std::cout << "===========================================================" << std::endl;
 }
 

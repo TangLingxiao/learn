@@ -35,14 +35,13 @@ public:
 	CSkipList* CreateList();
 	SSkipListNode* Insert(uint64 nkey, int32 nScore);
 	bool Delete(int32 nScore, uint64 nkey);
+	int32 GetRank(int32 nScore, uint64 nkey);
 	SSkipListNode *GetElementByRank(int32 nRank);//1-based
 	void PopBack(uint64 & nKey);
 	void GetElementsByRank(int32 nBegin, int32 nEnd, std::vector<SSkipListNode*> &vecResult);
 	int32 GetLength();
 	int32 GetSize();
 	int32 GetLevel();
-public:
-	void DumpAll();
 
 private:
 	SSkipListNode* _CreateNode(int32 nLevel, uint64 nKey, int32 nScore);
