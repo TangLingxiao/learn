@@ -1,6 +1,7 @@
 #include "skiplist.h"
+#include <cstdlib>
 
-SSkipListNode * CSkipList::_CreateNode(int32 nLevel, uint64 nKey, int32 nScore)
+SSkipListNode* CSkipList::_CreateNode(int32 nLevel, uint64 nKey, int32 nScore, uint64 nCmp) noexcept
 {
 	SSkipListNode* pNode = new SSkipListNode();
 	if (nLevel > 0)
@@ -9,11 +10,12 @@ SSkipListNode * CSkipList::_CreateNode(int32 nLevel, uint64 nKey, int32 nScore)
 	}
 	pNode->nKey = nKey;
 	pNode->nScore = nScore;
+	pNode->nCmp = nCmp;
 	m_nSize += sizeof(SSkipListNode) + nLevel * sizeof(SSkipListNode::SSkipListLevel);
 	return pNode;
 }
 
-void CSkipList::_ReleaseNode(SSkipListNode * pNode)
+void CSkipList::_ReleaseNode(SSkipListNode* pNode) noexcept
 {
 	if (pNode)
 	{
@@ -75,10 +77,40 @@ void CSkipList::_DeleteNode(SSkipListNode * pNode, SSkipListNode ** update)
 	m_nLength--;
 }
 
+CSkipList::CSkipList(CSkipList && oRh) noexcept
+{
+	m_nLevel = oRh.m_nLevel;
+	m_nLength = oRh.m_nLength;
+	m_pHeader = oRh.m_pHeader;//哨兵
+	m_pTail = oRh.m_pTail;
+	m_nSize = oRh.m_nSize;
+
+	oRh.m_pHeader = nullptr;
+	oRh.m_pTail = nullptr;
+}
+
+CSkipList & CSkipList::operator=(CSkipList && oRh) noexcept
+{
+	if (this == &oRh)
+	{
+		return *this;
+	}
+	m_nLevel = oRh.m_nLevel;
+	m_nLength = oRh.m_nLength;
+	m_pHeader = oRh.m_pHeader;//哨兵
+	m_pTail = oRh.m_pTail;
+	m_nSize = oRh.m_nSize;
+
+	oRh.m_pHeader = nullptr;
+	oRh.m_pTail = nullptr;
+
+	return *this;
+}
+
 CSkipList* CSkipList::CreateList()
 {
 	m_nLevel = 1;
-	m_pHeader = _CreateNode(SKIPLIST_MAXLEVEL, 0, 0);
+	m_pHeader = _CreateNode(SKIPLIST_MAXLEVEL, 0, 0, 0);
 	if (!m_pHeader)
 	{
 		return nullptr;
@@ -87,16 +119,19 @@ CSkipList* CSkipList::CreateList()
 }
 
 //不能插入同一个key,插入前必须先delete
-//插入一个没有的key//按分值从大到小排序
-SSkipListNode * CSkipList::Insert(uint64 nkey, int32 nScore)
+//插入一个没有的key//按分值从大到小排序，分值相同按cmp从小到大排序
+SSkipListNode* CSkipList::Insert(uint64 nkey, int32 nScore, uint64 nCmp)
 {
 	SSkipListNode *update[SKIPLIST_MAXLEVEL];//每层的前驱节点
 	int32 rank[SKIPLIST_MAXLEVEL];//每层前驱节点的排名
 	auto* pNode = m_pHeader;
 	for (int i = m_nLevel - 1; i >= 0; --i)
 	{
-		rank[i] = i == m_nLevel - 1 ? 0 : rank[i + 1];
-		while (pNode->pLevel[i].pForward && pNode->pLevel[i].pForward->nScore >= nScore)
+		rank[i] = i == (m_nLevel - 1) ? 0 : rank[i + 1];
+		while (pNode->pLevel[i].pForward &&
+			(pNode->pLevel[i].pForward->nScore > nScore ||
+			(pNode->pLevel[i].pForward->nScore == nScore &&
+				pNode->pLevel[i].pForward->nCmp < nCmp)))
 		{
 			rank[i] += pNode->pLevel[i].nSpan;
 			pNode = pNode->pLevel[i].pForward;
@@ -115,7 +150,7 @@ SSkipListNode * CSkipList::Insert(uint64 nkey, int32 nScore)
 		}
 		m_nLevel = nLevel;
 	}
-	pNode = _CreateNode(nLevel, nkey, nScore);
+	pNode = _CreateNode(nLevel, nkey, nScore, nCmp);
 	for (int i = 0; i < nLevel; ++i)
 	{
 		pNode->pLevel[i].pForward = update[i]->pLevel[i].pForward;
@@ -143,23 +178,23 @@ SSkipListNode * CSkipList::Insert(uint64 nkey, int32 nScore)
 	return pNode;
 }
 
-bool CSkipList::Delete(int32 nScore, uint64 nkey)
+bool CSkipList::Delete(int32 nScore, uint64 nCmp)
 {
 	SSkipListNode* update[SKIPLIST_MAXLEVEL];
 	auto* pNode = m_pHeader;
 	for (int i = m_nLevel - 1; i >= 0; --i)
 	{
-		while (pNode->pLevel[i].pForward && 
+		while (pNode->pLevel[i].pForward &&
 			(pNode->pLevel[i].pForward->nScore > nScore ||
-				(pNode->pLevel[i].pForward->nScore == nScore &&
-					pNode->pLevel[i].pForward->nKey != nkey)))
+			(pNode->pLevel[i].pForward->nScore == nScore &&
+				pNode->pLevel[i].pForward->nCmp < nCmp)))
 		{
 			pNode = pNode->pLevel[i].pForward;
 		}
 		update[i] = pNode;
 	}
 	pNode = pNode->pLevel[0].pForward;
-	if (pNode && pNode->nScore == nScore && pNode->nKey == nkey)//score可能会相同
+	if (pNode && pNode->nScore == nScore && pNode->nCmp == nCmp)//score可能会相同
 	{
 		_DeleteNode(pNode, update);
 		_ReleaseNode(pNode);
@@ -168,26 +203,24 @@ bool CSkipList::Delete(int32 nScore, uint64 nkey)
 	return false;
 }
 
-int32 CSkipList::GetRank(int32 nScore, uint64 nkey)
+int32 CSkipList::GetRank(int32 nScore, uint64 nCmp)
 {
-	int32 nTraversed = 0;
+	int32 nRank = 0;
 	auto* pNode = m_pHeader;
 	for (int i = m_nLevel - 1; i >= 0; --i)
 	{
 		while (pNode->pLevel[i].pForward &&
 			(pNode->pLevel[i].pForward->nScore > nScore ||
 			(pNode->pLevel[i].pForward->nScore == nScore &&
-				pNode->pLevel[i].pForward->nKey != nkey)))
+				pNode->pLevel[i].pForward->nCmp <= nCmp)))
 		{
-			nTraversed += pNode->pLevel[i].nSpan;
+			nRank += pNode->pLevel[i].nSpan;
 			pNode = pNode->pLevel[i].pForward;
 		}
 	}
-	nTraversed++;
-	pNode = pNode->pLevel[0].pForward;
-	if (pNode && pNode->nScore == nScore && pNode->nKey == nkey)//score可能会相同
+	if (pNode && pNode->nScore == nScore && pNode->nCmp == nCmp)
 	{
-		return nTraversed;
+		return nRank;
 	}
 	return 0;
 }
@@ -213,8 +246,12 @@ SSkipListNode * CSkipList::GetElementByRank(int32 nRank)
 
 void CSkipList::PopBack(uint64 & nKey)
 {
+	if (m_pTail == nullptr)
+	{
+		return;
+	}
 	nKey = m_pTail->nKey;
-	Delete(m_pTail->nScore, m_pTail->nKey);
+	Delete(m_pTail->nScore, m_pTail->nCmp);
 }
 
 void CSkipList::GetElementsByRank(int32 nBegin, int32 nEnd, std::vector<SSkipListNode*>& vecResult)
@@ -252,5 +289,15 @@ int32 CSkipList::GetSize()
 int32 CSkipList::GetLevel()
 {
 	return m_nLevel;
+}
+
+void CSkipList::DumpAll(std::vector<SSkipListNode*>& vecResult)
+{
+	auto *pNode = m_pHeader->pLevel[0].pForward;
+	while (pNode)
+	{
+		vecResult.emplace_back(pNode);
+		pNode = pNode->pLevel[0].pForward;
+	}
 }
 

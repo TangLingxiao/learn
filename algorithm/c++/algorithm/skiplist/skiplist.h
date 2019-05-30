@@ -20,33 +20,36 @@ struct SSkipListNode
 
 	uint64 nKey = 0;
 	int32 nScore = 0;
+	uint64 nCmp = 0;
 };
 
 class CSkipList
 {
 public:
 	CSkipList() = default;
+	CSkipList(CSkipList& oRh) = delete;
+	CSkipList& operator=(CSkipList& oRh) = delete;
+	CSkipList(CSkipList&& oRh) noexcept;
+	CSkipList& operator=(CSkipList&& oRh) noexcept;
 	~CSkipList()
 	{
 		_ReleaseList();
 	}
-	CSkipList(CSkipList&) = delete;
-	CSkipList& operator=(CSkipList&) = delete;
 	CSkipList* CreateList();
-	SSkipListNode* Insert(uint64 nkey, int32 nScore);
-	bool Delete(int32 nScore, uint64 nkey);
-	int32 GetRank(int32 nScore, uint64 nkey);
+	SSkipListNode* Insert(uint64 nkey, int32 nScore, uint64 nCmp);
+	bool Delete(int32 nScore, uint64 nCmp);
+	int32 GetRank(int32 nScore, uint64 nCmp);
 	SSkipListNode *GetElementByRank(int32 nRank);//1-based
 	void PopBack(uint64 & nKey);
 	void GetElementsByRank(int32 nBegin, int32 nEnd, std::vector<SSkipListNode*> &vecResult);
 	int32 GetLength();
 	int32 GetSize();
 	int32 GetLevel();
-
+	void DumpAll(std::vector<SSkipListNode*> & vecResult);
 private:
-	SSkipListNode* _CreateNode(int32 nLevel, uint64 nKey, int32 nScore);
-	void _ReleaseNode(SSkipListNode* pNode);
-	
+	SSkipListNode* _CreateNode(int32 nLevel, uint64 nKey, int32 nScore, uint64 nCmp) noexcept;
+	void _ReleaseNode(SSkipListNode* pNode)noexcept;
+
 	void _ReleaseList();
 
 	int _GetRandLevel();
