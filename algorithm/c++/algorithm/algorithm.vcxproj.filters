@@ -13,6 +13,9 @@
     <Filter Include="skiplist">
       <UniqueIdentifier>{3e737ace-48ff-402b-a66a-e4a0491959cc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="dynamic">
+      <UniqueIdentifier>{9dc492a7-3a66-451a-af14-c1f2ed6dfcb2}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sort\sort.h">
@@ -26,6 +29,9 @@
     </ClInclude>
     <ClInclude Include="skiplist\rankmgr.h">
       <Filter>skiplist</Filter>
+    </ClInclude>
+    <ClInclude Include="dynamic\dynamic.h">
+      <Filter>dynamic</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
