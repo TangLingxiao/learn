@@ -10,8 +10,8 @@ class wenku8():
     def __init__(self):
         self.loginurl = 'https://www.wenku8.net/login.php?do=submit&jumpurl=http%3A%2F%2Fwww.wenku8.net%2Findex.php'
         self.indexurl = 'http://www.wenku8.net/index.php'
-        self.username = '723654638'
-        self.password = 'nima4DSB'
+        self.username = ''
+        self.password = ''
         self.formdata = {}
         self.formdata['username'] = self.username
         self.formdata['password'] = self.password
