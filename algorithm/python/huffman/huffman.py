@@ -35,23 +35,23 @@ def parser_file(file, heap):
         cal[c] = cal[c] + 1 if c in cal.keys() else 1
     
     for k,v in cal.items():
-        heap.insert(Letter(k,v))
+        heap.insert(Letter(k,v), Cmp().cmp)
     
     #heap.dumpAll()
 
 def build_tree(heap):
     while not heap.empty():
-        left = heap.pop()
-        right = heap.pop()
+        left = heap.pop(Cmp().cmp)
+        right = heap.pop(Cmp().cmp)
         if left is not None and right is not None:
-            heap.insert(Node(left.times + right.times, left, right))
+            heap.insert(Node(left.times + right.times, left, right), Cmp().cmp)
         elif left is None:
             return right
         elif right is None:
             return left
 
 def travel_tree(root, lst, bitstring=''):
-    if type(root) == Letter:
+    if type(root) == Letter: # python3 only
         root.bitstring = bitstring
         lst.append(root)
         return

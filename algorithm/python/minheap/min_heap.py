@@ -1,7 +1,6 @@
 #coding : utf-8
-from huffman import Cmp
 
-class MinHeap(Cmp):
+class MinHeap:
     def __init__(self, lst):
         self.list = []
         self.__build_heap(lst)
@@ -13,7 +12,7 @@ class MinHeap(Cmp):
     def empty(self):
         return len(self.list) == 0
 
-    def pop(self):
+    def pop(self, func):
         if len(self.list) == 0:
             return None
 
@@ -21,33 +20,35 @@ class MinHeap(Cmp):
         self.list[0] = self.list[-1]
         self.list.pop()
         if len(self.list) > 0:
-            self.__arrange(0)
+            self.__arrange(0, func)
         return minelm
     
-    def insert(self, elm):
+    def insert(self, elm, func):
         self.list.append(elm)
         index = int(len(self.list) / 2  - 1)
         while index >= 0:
-            self.__arrange(index)
+            self.__arrange(index, func)
             index = index - 1
 
 
-    def __arrange(self, index):
+    def __arrange(self, index, func = None):
         left = 2 * index + 1
         right = 2 * index + 2
         minindex = index
         minnum = self.list[index]
-        if left < len(self.list) and self.cmp(self.list[left], self.list[index]):#self.list[left] < self.list[index]:
+        if func is None:
+            func = lambda a, b : a < b
+        if left < len(self.list) and func(self.list[left], self.list[index]):#self.list[left] < self.list[index]:
             minindex = left
             minnum = self.list[left]
             
-        if right < len(self.list) and self.cmp(self.list[right], self.list[index]):#self.list[right] < self.list[index]:
+        if right < len(self.list) and func(self.list[right], self.list[index]):#self.list[right] < self.list[index]:
             minindex = right
             minnum = self.list[right]
 
         if minindex != index:
             self.list[index], self.list[minindex] = self.list[minindex], self.list[index]
-            self.__arrange(minindex)
+            self.__arrange(minindex, func)
 
 
     def dumpAll(self):
