@@ -1,0 +1,8 @@
+#!/bin/bash
+
+SUB_DIRS=(./)
+for var in ${SUB_DIRS[*]}; do
+	find $var -iname \*.[hc] -exec grep --color -wn -H $1 \{\} \;
+	find $var -iname \*.cpp -exec grep --color -wn -H $1 \{\} \;
+	find $var -iname \*.py -exec grep --color -wn -H $1 \{\} \;
+done

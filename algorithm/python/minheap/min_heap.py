@@ -35,16 +35,13 @@ class MinHeap:
         left = 2 * index + 1
         right = 2 * index + 2
         minindex = index
-        minnum = self.list[index]
         if func is None:
             func = lambda a, b : a < b
         if left < len(self.list) and func(self.list[left], self.list[index]):#self.list[left] < self.list[index]:
             minindex = left
-            minnum = self.list[left]
             
         if right < len(self.list) and func(self.list[right], self.list[index]):#self.list[right] < self.list[index]:
             minindex = right
-            minnum = self.list[right]
 
         if minindex != index:
             self.list[index], self.list[minindex] = self.list[minindex], self.list[index]
