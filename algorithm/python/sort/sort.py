@@ -92,25 +92,27 @@ class CSort:
     def quick_sort(self, p, r):
         if p >= r:
             return
-        q = self.partition4(p, r)
+        q = self.partition3(p, r)
         self.quick_sort(p, q - 1)
         self.quick_sort(q + 1, r)
 
-    def partition3(self, begin, end):
+    def partition3(self, begin,end):
         key = self.nums[end]
-        leftindex = begin
-        rightindex = end - 1
-        while rightindex > leftindex:
-            if self.nums[rightindex] < key:
-                while leftindex < rightindex:
-                    if self.nums[leftindex] > key:
-                        self.nums[leftindex], self.nums[rightindex] = self.nums[rightindex], self.nums[leftindex]
-                        leftindex = leftindex + 1
+        index = end
+        ri,li = end-1,begin
+        while li<ri:
+            if self.nums[li]>key:
+                self.nums[index]=self.nums[li]
+                index=li
+                while ri>li:
+                    if self.nums[ri]<key:
+                        self.nums[index]=self.nums[ri]
+                        index=ri
                         break
-                    leftindex = leftindex + 1
-            rightindex = rightindex - 1
-        self.nums[end], self.nums[leftindex] = self.nums[leftindex], key
-        return leftindex
+                    ri=ri-1
+            li=li+1
+        self.nums[index]=key
+        return index
 
     def partition4(self, begin, end):
         key = self.nums[end]
@@ -126,7 +128,7 @@ class CSort:
         return mid + 1
 
 if __name__ == "__main__":
-    nums = [8, 6, 10, 4, 1]
+    nums = [9, 5, 6, 4, 2, 1, 7]
     c = CSort(nums)
     #c.insert_sort()
     #c.select_sort()

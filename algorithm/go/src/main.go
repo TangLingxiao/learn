@@ -58,5 +58,5 @@ func testSort(data []int64, fn func(data []int64)) {
 }
 func main() {
 	arr := []int64{9, 5, 6, 4, 2, 1, 7}
-	testSort(arr, mysort.HeapSort)
+	testSort(arr, mysort.QuickSort)
 }
