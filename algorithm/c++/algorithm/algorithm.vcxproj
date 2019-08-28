@@ -20,13 +20,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="skiplist\rankmgr.cpp" />
     <ClCompile Include="skiplist\skiplist.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dynamic\dynamic.h" />
     <ClInclude Include="maxpriority\maxpriority.h" />
-    <ClInclude Include="skiplist\rankmgr.h" />
     <ClInclude Include="skiplist\skiplist.h" />
     <ClInclude Include="sort\sort.h" />
   </ItemGroup>

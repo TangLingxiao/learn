@@ -27,9 +27,6 @@
     <ClInclude Include="skiplist\skiplist.h">
       <Filter>skiplist</Filter>
     </ClInclude>
-    <ClInclude Include="skiplist\rankmgr.h">
-      <Filter>skiplist</Filter>
-    </ClInclude>
     <ClInclude Include="dynamic\dynamic.h">
       <Filter>dynamic</Filter>
     </ClInclude>
@@ -39,9 +36,6 @@
       <Filter>framework</Filter>
     </ClCompile>
     <ClCompile Include="skiplist\skiplist.cpp">
-      <Filter>skiplist</Filter>
-    </ClCompile>
-    <ClCompile Include="skiplist\rankmgr.cpp">
       <Filter>skiplist</Filter>
     </ClCompile>
   </ItemGroup>

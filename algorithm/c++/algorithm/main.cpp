@@ -5,7 +5,6 @@
 #include <stdio.h>
 #include "sort\sort.h"
 #include "maxpriority\maxpriority.h"
-#include "skiplist\rankmgr.h"
 #include <iostream>
 #include <ctime>
 #include <random>
