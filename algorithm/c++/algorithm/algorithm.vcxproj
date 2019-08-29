@@ -25,6 +25,8 @@
   <ItemGroup>
     <ClInclude Include="dynamic\dynamic.h" />
     <ClInclude Include="maxpriority\maxpriority.h" />
+    <ClInclude Include="pattern\factory.h" />
+    <ClInclude Include="pattern\singleton.h" />
     <ClInclude Include="skiplist\skiplist.h" />
     <ClInclude Include="sort\sort.h" />
   </ItemGroup>

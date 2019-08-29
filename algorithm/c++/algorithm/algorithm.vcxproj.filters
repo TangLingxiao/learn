@@ -16,6 +16,12 @@
     <Filter Include="dynamic">
       <UniqueIdentifier>{9dc492a7-3a66-451a-af14-c1f2ed6dfcb2}</UniqueIdentifier>
     </Filter>
+    <Filter Include="factory">
+      <UniqueIdentifier>{786618ac-4e0c-4c05-8d5e-189962200e1c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="sigleton">
+      <UniqueIdentifier>{9f6c05be-6009-4689-8ae5-e3b011860ebb}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sort\sort.h">
@@ -29,6 +35,12 @@
     </ClInclude>
     <ClInclude Include="dynamic\dynamic.h">
       <Filter>dynamic</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern\factory.h">
+      <Filter>factory</Filter>
+    </ClInclude>
+    <ClInclude Include="pattern\singleton.h">
+      <Filter>sigleton</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
