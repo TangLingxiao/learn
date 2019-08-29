@@ -19,13 +19,16 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="log\logmgr.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="skiplist\skiplist.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dynamic\dynamic.h" />
+    <ClInclude Include="log\logmgr.h" />
     <ClInclude Include="maxpriority\maxpriority.h" />
     <ClInclude Include="pattern\factory.h" />
+    <ClInclude Include="pattern\observer.h" />
     <ClInclude Include="pattern\singleton.h" />
     <ClInclude Include="skiplist\skiplist.h" />
     <ClInclude Include="sort\sort.h" />
@@ -91,6 +94,7 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -99,6 +103,10 @@
       <Optimization>Disabled</Optimization>
       <SDLCheck>true</SDLCheck>
       <ConformanceMode>true</ConformanceMode>
+      <UndefinePreprocessorDefinitions>
+      </UndefinePreprocessorDefinitions>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <AdditionalOptions>/D _CRT_SECURE_NO_WARNINGS %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">

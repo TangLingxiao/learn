@@ -3,7 +3,7 @@
 
 //c++11 thread safe
 template<typename T>
-class Sigleton
+class Singleton
 {
 public:
 	T& getInstance()

@@ -4,26 +4,27 @@
 #include <mutex>
 #include <string>
 #include <map>
-#include "singleton.h"
-
+#include "log/logmgr.h"
 struct MyStruct
 {
 	MyStruct(std::string key):key(key){}
 	std::string key;
 	const std::string& getKey() { return key; }
 };
-class Factory :public std::enable_shared_from_this<Factory>
+
+template<typename T>
+class Factory :public std::enable_shared_from_this<Factory<T>>
 {
 public:
-	std::shared_ptr<MyStruct> getOne(const std::string& key)
+	std::shared_ptr<T> getOne(const std::string& key)
 	{
-		std::shared_ptr<MyStruct> t;
+		std::shared_ptr<T> t;
 		std::lock_guard<std::mutex> lock(mutex_);
-		std::weak_ptr<MyStruct>& weak = mapS[key];
+		std::weak_ptr<T>& weak = mapS[key];
 		t = weak.lock();
 		if (!t)
 		{
-			t.reset(new MyStruct(key), std::bind(&Factory::deleteCallBack, std::weak_ptr<Factory>(shared_from_this()), std::placeholders::_1));
+			t.reset(new T(key), std::bind(&Factory::deleteCallBack, std::weak_ptr<Factory>(shared_from_this()), std::placeholders::_1));
 			weak = t;
 		}
 		return t;
@@ -31,17 +32,18 @@ public:
 
 
 private:
-	static void deleteCallBack(const std::weak_ptr<Factory>& weakptr, MyStruct* t)
+	static void deleteCallBack(const std::weak_ptr<Factory>& weakptr, T* t)
 	{
 		auto shareptr(weakptr.lock());
 		if (shareptr)
 		{
 			shareptr->remove(t);
 		}
+		LOG_DEBUG("delete key" << t->getKey());
 		delete t;
 	}
 
-	void remove(MyStruct* t)
+	void remove(T* t)
 	{
 		if (t)
 		{
@@ -51,6 +53,6 @@ private:
 	}
 	
 	std::mutex mutex_;
-	std::map<std::string, std::weak_ptr<MyStruct>> mapS;
+	std::map<std::string, std::weak_ptr<T>> mapS;
 };
 #endif
