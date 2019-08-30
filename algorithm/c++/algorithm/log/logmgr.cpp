@@ -5,6 +5,7 @@
 #include <chrono>
 #include <cstdio>
 #include <cstdlib>
+#include <functional>
 
 class Log
 {
@@ -37,7 +38,7 @@ public:
 	{
 		uint64_t n = 0;
 		char buf[64];
-		time_t time = sLogData.time;
+		time_t time = sLogData.iTime;
 		size_t len = strftime(buf, 64, "%Y-%m-%d %H:%M:%S ", localtime(&time));
 		buf[len < 64 ? len : 63] = '\0';
 		std::string strLog(buf);

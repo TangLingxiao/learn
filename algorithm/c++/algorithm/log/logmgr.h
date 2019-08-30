@@ -18,9 +18,9 @@ enum LogLevel
 
 struct LogData
 {
-	LogData(const std::string& strLog, uint32_t time) :strLog(strLog), time(time) {}
+	LogData(const std::string& log, uint32_t time) :strLog(log), iTime(time) {}
 	std::string strLog;
-	uint32_t time;
+	uint32_t iTime;
 };
 
 class Log;

@@ -1,18 +1,21 @@
 #ifndef __FACTORY_H__
 #define __FACTORY_H__
+
 #include <memory>
 #include <mutex>
 #include <string>
 #include <map>
 #include "logmgr.h"
+#include <functional>
+
 struct MyStruct
 {
-	MyStruct(std::string key):key(key){}
+	MyStruct(std::string key):strKey(key){}
 	~MyStruct()
 	{
 	}
-	std::string key;
-	const std::string& getKey() { return key; }
+	std::string strKey;
+	const std::string& getKey() { return strKey; }
 };
 
 template<typename T>
@@ -33,7 +36,7 @@ public:
 			t = weak.lock();
 			if (!t)
 			{
-				t.reset(new T(key), std::bind(&Factory::deleteCallBack, std::weak_ptr<Factory>(shared_from_this()), std::placeholders::_1));
+				t.reset(new T(key), std::bind(&Factory<T>::deleteCallBack, std::weak_ptr<Factory<T>>(this->shared_from_this()), std::placeholders::_1));
 				weak = t;
 			}
 		}
@@ -43,7 +46,7 @@ public:
 
 
 private:
-	static void deleteCallBack(const std::weak_ptr<Factory>& weakptr, T* t)
+	static void deleteCallBack(const std::weak_ptr<Factory<T>>& weakptr, T* t)
 	{
 		auto shareptr(weakptr.lock());
 		if (shareptr)

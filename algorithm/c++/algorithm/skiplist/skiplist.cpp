@@ -11,7 +11,7 @@ SSkipListNode* CSkipList::_CreateNode(int32 nLevel, uint64 nKey, int32 nScore, u
 	pNode->nKey = nKey;
 	pNode->nScore = nScore;
 	pNode->nCmp = nCmp;
-	m_nSize += sizeof(SSkipListNode) + nLevel * sizeof(SSkipListNode::SSkipListLevel);
+	m_nSize += static_cast<int32>(sizeof(SSkipListNode) + nLevel * sizeof(SSkipListNode::SSkipListLevel));
 	return pNode;
 }
 

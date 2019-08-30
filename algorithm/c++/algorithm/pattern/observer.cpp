@@ -1,7 +1,7 @@
 #include "observer.h"
 
 #include "logmgr.h"
-void Observerable::register_(std::weak_ptr<Observer>& observer)
+void Observerable::register_(const std::weak_ptr<Observer>& observer)
 {
 	{
 		std::lock_guard<std::mutex> lock(m_mtx);

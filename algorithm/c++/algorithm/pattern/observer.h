@@ -12,7 +12,7 @@ class Observer;
 class Observerable :public std::enable_shared_from_this<Observerable>
 {
 public:
-	void register_(std::weak_ptr<Observer>& observer);
+	void register_(const std::weak_ptr<Observer>& observer);
 
 
 	void notify();
