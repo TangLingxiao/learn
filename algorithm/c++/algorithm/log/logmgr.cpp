@@ -19,17 +19,18 @@ public:
 	}
 	virtual ~Log()
 	{
+		if (m_fp)
+		{
+			fclose(m_fp);
+		}
+		m_fp = nullptr;
 	}
 	
 	bool init()
 	{
-		auto fp = fopen(m_strTrueFile.c_str(), "a+");
-		if (nullptr == fp)
-		{
-			return false;
-		}
-		m_fp.reset(fp); //std::make_shared<std::FILE>(fp);
-		return true;
+		m_fp = fopen(m_strTrueFile.c_str(), "a+");
+		
+		return nullptr != m_fp;
 	}
 
 	void writeLog(const LogData& sLogData)
@@ -37,23 +38,28 @@ public:
 		uint64_t n = 0;
 		char buf[64];
 		time_t time = sLogData.time;
-		size_t len = strftime(buf, 64, "%Y-%m-%d %H:%M:%S", localtime(&time));
+		size_t len = strftime(buf, 64, "%Y-%m-%d %H:%M:%S ", localtime(&time));
 		buf[len < 64 ? len : 63] = '\0';
-		std::string strTime(buf);
-		n += fwrite(strTime.c_str(), 1, strTime.size(), m_fp.get());
-		n += fwrite(sLogData.strLog.c_str(), 1, sLogData.strLog.size(), m_fp.get());
+		std::string strLog(buf);
+		strLog += sLogData.strLog;
+		printf("%s", strLog.c_str());
+		n += fwrite(strLog.c_str(), 1, strLog.size(), m_fp);
 		m_iFileLength += n;
-		fflush(m_fp.get());
+		fflush(m_fp);
 	}
 
 private:
 	std::string m_strFileName;
 	std::string m_strFilePath;
 	std::string m_strTrueFile;
-	//std::FILE* m_fp = nullptr;
-	std::shared_ptr<std::FILE> m_fp;
+	std::FILE* m_fp = nullptr;
 	uint64_t m_iFileLength = 0;
 };
+
+LogMgr::~LogMgr()
+{
+
+}
 
 bool LogMgr::init(const std::string & strName, const std::string & strPath)
 {
@@ -64,7 +70,7 @@ bool LogMgr::init(const std::string & strName, const std::string & strPath)
 	{
 		return false;
 	}
-	m_thread = std::thread(std::bind(&LogMgr::loggerThreadEntry, shared_from_this()));
+	m_thread = std::thread(std::bind(&LogMgr::loggerThreadEntry, this));
 	return true;
 }
 

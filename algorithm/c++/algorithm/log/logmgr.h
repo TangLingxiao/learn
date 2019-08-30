@@ -7,7 +7,7 @@
 #include <memory>
 #include <mutex>
 #include <thread>
-
+#include "singleton.h"
 enum LogLevel
 {
 	LEVEL_DEBUG,
@@ -25,9 +25,10 @@ struct LogData
 
 class Log;
 
-class LogMgr:public std::enable_shared_from_this<LogMgr>
+class LogMgr:public Singleton<LogMgr>
 {
 public:
+	~LogMgr();
 	bool init(const std::string& strName, const std::string& strPath);
 	void release();
 	void setLogLevel(LogLevel eLogLevel);
@@ -46,17 +47,14 @@ private:
 	std::thread m_thread;
 };
 
-static std::shared_ptr<LogMgr> gLogMgr;
-
 #define LOG_WITH_LEVELCHECK(level, x)do\
 {\
-	if(gLogMgr->getLogLevel()>level)\
+	if(LogMgr::getInstance().getLogLevel() <= level)\
 	{\
-		return;\
+		std::ostringstream os;\
+		os<<std::this_thread::get_id()<<"|"<<__FILE__<<":"<<__LINE__<<"|"<<x<<std::endl;\
+		LogMgr::getInstance().addLog(os.str());\
 	}\
-	std::ostringstream os;\
-	os<<std::this_thread::get_id()<<"|"<<__FILE__<<":"<<__LINE__<<"|"<<x<<std::endl;\
-	gLogMgr->addLog(os.str());\
 }while(0)
 
 #define LOG_DEBUG(x) LOG_WITH_LEVELCHECK(LEVEL_DEBUG, "DEBUG|" << x)
