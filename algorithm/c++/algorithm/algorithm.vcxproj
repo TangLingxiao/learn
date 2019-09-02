@@ -21,7 +21,6 @@
   <ItemGroup>
     <ClCompile Include="log\logmgr.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="pattern\oberver.cpp" />
     <ClCompile Include="pattern\observer.cpp" />
     <ClCompile Include="skiplist\skiplist.cpp" />
   </ItemGroup>
@@ -98,6 +97,7 @@
       <ConformanceMode>true</ConformanceMode>
       <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <AdditionalIncludeDirectories>log;pattern;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">

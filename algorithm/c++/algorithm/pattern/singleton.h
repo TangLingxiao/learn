@@ -12,4 +12,29 @@ public:
 		return instance;
 	}
 };
+
+/*
+#include <pthread.h>
+
+template <typename T>
+class Singleton
+{
+public:
+	static T& Instance()
+	{
+		pthread_once(&ponce, init);
+		return *pInstace;
+	}
+
+private:
+	static void init()
+	{
+		pInstace = new T();
+	}
+
+	static T* pInstace;
+	static pthread_once_t ponce;
+};
+
+*/
 #endif // !_SINGLETON_H_

@@ -59,9 +59,8 @@
     <ClCompile Include="log\logmgr.cpp">
       <Filter>log</Filter>
     </ClCompile>
-    <ClCompile Include="pattern\oberver.cpp">
+    <ClCompile Include="pattern\observer.cpp">
       <Filter>pattern</Filter>
     </ClCompile>
-    <ClCompile Include="pattern\observer.cpp" />
   </ItemGroup>
 </Project>
