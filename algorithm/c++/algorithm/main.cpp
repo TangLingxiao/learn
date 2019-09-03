@@ -2,6 +2,8 @@
 #include "log/logmgr.h"
 #include "observer.h"
 #include "factory.h"
+#include "test/blockingqueue_test.h"
+
 void test1()
 {
 	std::shared_ptr<Factory<MyStruct>> factory(new Factory<MyStruct>);
@@ -21,13 +23,13 @@ void test2()
 
 int main(int argc, char* argv[])
 {
-	if (!LogMgr::getInstance().init("algo.log", "./"))
+	if (!LogMgr::getInstance().init("algo.log", "./", true))
 	{
 		exit(-1);
 	}
 	////////////////////////////////////////////////////
 
-
+	testBlockingQueue();
 
 
 	////////////////////////////////////////////////////

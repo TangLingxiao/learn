@@ -23,6 +23,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="pattern\observer.cpp" />
     <ClCompile Include="skiplist\skiplist.cpp" />
+    <ClCompile Include="structure\blockingqueue.h" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="dynamic\dynamic.h" />
@@ -33,6 +34,8 @@
     <ClInclude Include="pattern\singleton.h" />
     <ClInclude Include="skiplist\skiplist.h" />
     <ClInclude Include="sort\sort.h" />
+    <ClInclude Include="structure\countdownlatch.h" />
+    <ClInclude Include="test\blockingqueue_test.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>

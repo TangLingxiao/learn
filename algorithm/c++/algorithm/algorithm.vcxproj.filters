@@ -22,6 +22,12 @@
     <Filter Include="log">
       <UniqueIdentifier>{0c4e2cf3-2b8a-4e75-92c2-b4e5c19e7354}</UniqueIdentifier>
     </Filter>
+    <Filter Include="structure">
+      <UniqueIdentifier>{694ea2da-0322-4ee0-8e4e-21f4736e46da}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="test">
+      <UniqueIdentifier>{d81ffc41-2aa1-4471-a332-2e8c6abf09ae}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="sort\sort.h">
@@ -48,6 +54,12 @@
     <ClInclude Include="log\logmgr.h">
       <Filter>log</Filter>
     </ClInclude>
+    <ClInclude Include="structure\countdownlatch.h">
+      <Filter>structure</Filter>
+    </ClInclude>
+    <ClInclude Include="test\blockingqueue_test.h">
+      <Filter>test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -61,6 +73,9 @@
     </ClCompile>
     <ClCompile Include="pattern\observer.cpp">
       <Filter>pattern</Filter>
+    </ClCompile>
+    <ClCompile Include="structure\blockingqueue.h">
+      <Filter>structure</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

@@ -29,7 +29,7 @@ class LogMgr:public Singleton<LogMgr>
 {
 public:
 	~LogMgr();
-	bool init(const std::string& strName, const std::string& strPath);
+	bool init(const std::string& strName, const std::string& strPath, bool clear);
 	void release();
 	void setLogLevel(LogLevel eLogLevel);
 	void addLog(const std::string& strLog);

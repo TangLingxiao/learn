@@ -27,10 +27,16 @@ public:
 		m_fp = nullptr;
 	}
 	
-	bool init()
+	bool init(bool clear)
 	{
-		m_fp = fopen(m_strTrueFile.c_str(), "a+");
-		
+		if (clear)
+		{
+			m_fp = fopen(m_strTrueFile.c_str(), "w");
+		}
+		else
+		{
+			m_fp = fopen(m_strTrueFile.c_str(), "a+");
+		}
 		return nullptr != m_fp;
 	}
 
@@ -62,12 +68,12 @@ LogMgr::~LogMgr()
 
 }
 
-bool LogMgr::init(const std::string & strName, const std::string & strPath)
+bool LogMgr::init(const std::string& strName, const std::string& strPath, bool clear)
 {
 	std::lock_guard<std::mutex> lock(m_mtx);
 	m_strPath = strPath;
 	m_pLog.reset(new Log(strName, strPath));
-	if (!m_pLog->init())
+	if (!m_pLog->init(clear))
 	{
 		return false;
 	}
