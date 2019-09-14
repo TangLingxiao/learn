@@ -162,30 +162,6 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles/algo.dir/build.make CMakeFiles/algo.dir/main.cpp.s
 .PHONY : main.cpp.s
 
-pattern/oberver.o: pattern/oberver.cpp.o
-.PHONY : pattern/oberver.o
-
-# target to build an object file
-pattern/oberver.cpp.o:
-	$(MAKE) -f CMakeFiles/algo.dir/build.make CMakeFiles/algo.dir/pattern/oberver.cpp.o
-.PHONY : pattern/oberver.cpp.o
-
-pattern/oberver.i: pattern/oberver.cpp.i
-.PHONY : pattern/oberver.i
-
-# target to preprocess a source file
-pattern/oberver.cpp.i:
-	$(MAKE) -f CMakeFiles/algo.dir/build.make CMakeFiles/algo.dir/pattern/oberver.cpp.i
-.PHONY : pattern/oberver.cpp.i
-
-pattern/oberver.s: pattern/oberver.cpp.s
-.PHONY : pattern/oberver.s
-
-# target to generate assembly for a file
-pattern/oberver.cpp.s:
-	$(MAKE) -f CMakeFiles/algo.dir/build.make CMakeFiles/algo.dir/pattern/oberver.cpp.s
-.PHONY : pattern/oberver.cpp.s
-
 pattern/observer.o: pattern/observer.cpp.o
 .PHONY : pattern/observer.o
 
@@ -249,9 +225,6 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
-	@echo "... pattern/oberver.o"
-	@echo "... pattern/oberver.i"
-	@echo "... pattern/oberver.s"
 	@echo "... pattern/observer.o"
 	@echo "... pattern/observer.i"
 	@echo "... pattern/observer.s"

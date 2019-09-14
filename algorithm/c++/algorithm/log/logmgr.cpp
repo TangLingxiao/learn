@@ -117,7 +117,6 @@ void LogMgr::loggerThreadEntry()
 		}
 		if (lLog.empty())
 		{
-			std::lock_guard<std::mutex> lock(m_mtx);
 			if (m_bTerminate)
 			{
 				break;
