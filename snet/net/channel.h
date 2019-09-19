@@ -3,12 +3,12 @@
 
 #include <functional>
 #include "base/noncopyable.h"
+#include "base/callback.h"
 class EventLoop;
 
 class Channel : public NonCopyable
 {
 public:
-    using EventCallback = std::function<void()>;
     Channel(EventLoop *loop, int32_t iFd);
     void handleEvent();
     void setReadCallback(const EventCallback &cb) { m_fReadCallback = cb; }
