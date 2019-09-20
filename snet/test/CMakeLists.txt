@@ -41,3 +41,6 @@ target_link_libraries(test_eventloop snet)
 
 ADD_EXECUTABLE(test_poller ${CMAKE_CURRENT_SOURCE_DIR}/test_poller.cpp)
 target_link_libraries(test_poller snet)
+
+ADD_EXECUTABLE(test_timerqueue ${CMAKE_CURRENT_SOURCE_DIR}/test_timerqueue.cpp)
+target_link_libraries(test_timerqueue snet)

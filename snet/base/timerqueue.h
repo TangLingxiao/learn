@@ -4,6 +4,7 @@
 #include <set>
 #include <memory>
 #include "callback.h"
+#include <vector>
 
 class Timer;
 class EventLoop;
@@ -16,10 +17,14 @@ public:
     ~TimerQueue();
     void addTimer(int32_t intervalMs, TimerCallBack cb, bool loop = false);
     void ReadCallBack();
-    void addTimerCallBack(std::unique_ptr<Timer> timer);
-    void resetTimer(uint32_t iExpireMs);
+    void addTimerInLoop(Timer *timer);
+    std::vector<std::pair<int64_t, Timer *>> getExpired(int64_t iNow);
+    void resetTimer(int64_t iExpireMs);
+    void reset(const std::vector<std::pair<int64_t, Timer *>> &vExpired, int64_t iNow);
+
 private:
-    using TimerSet = std::set<uint32_t, std::unique_ptr<Timer>>;
+    bool insertTimer(Timer *timer);
+    using TimerSet = std::set<std::pair<int64_t, Timer *>>;
     EventLoop *m_pLoop;
     int m_iFd;
     std::unique_ptr<Channel> m_chan;

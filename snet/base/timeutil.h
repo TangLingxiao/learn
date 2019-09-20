@@ -10,72 +10,69 @@
 class TimeUtil
 {
 public:
-    static uint32_t getNow();
-    static uint32_t getNowMs();
-    static int32_t getTimeDiff(uint32_t time1, uint32_t time2);
-    static std::string formatTime(uint32_t time);
+    static int64_t getNow()
+    {
+        return static_cast<int64_t>(time(0));
+    }
+    static int64_t getNowMs()
+    {
+        timeval time;
+        if (gettimeofday(&time, nullptr) < 0)
+        {
+            return 0;
+        }
+        return static_cast<int64_t>(time.tv_sec * 1000 + time.tv_usec / 1000);
+    }
+    static int64_t getTimeDiff(int64_t time1, int64_t time2)
+    {
+        if (time1 < time2)
+        {
+            return 0;
+        }
+        return time1 - time2;
+    }
+    static std::string formatTime(int64_t time)
+    {
+        char buf[32];
+        time_t timet = time;
+        tm result;
+        gmtime_r(&timet, &result);
+        snprintf(buf, sizeof buf, "%4d%02d%02d %02d:%02d:%02d",
+                 result.tm_year + 1900, result.tm_mon + 1, result.tm_mday, result.tm_hour, result.tm_min, result.tm_sec);
+        return buf;
+    }
 };
-
-uint32_t TimeUtil::getNow()
-{
-    return time(0);
-}
-
-uint32_t TimeUtil::getNowMs()
-{
-    timeval time;
-    if (gettimeofday(&time, nullptr) < 0)
-    {
-        return 0;
-    }
-    return time.tv_sec * 1000 + time.tv_usec / 1000;
-}
-
-int32_t TimeUtil::getTimeDiff(uint32_t time1, uint32_t time2)
-{
-    if (time1 < time2)
-    {
-        return 0;
-    }
-    return time1 - time2;
-}
-
-std::string TimeUtil::formatTime(uint32_t time)
-{
-    char buf[32];
-    time_t timet = time;
-    tm result;
-    gmtime_r(&timet, &result);
-    snprintf(buf, sizeof buf, "%4d%02d%02d %02d:%02d:%02d",
-             result.tm_year + 1900, result.tm_mon + 1, result.tm_mday, result.tm_hour, result.tm_min, result.tm_sec);
-    return buf;
-}
 
 class Timer : public NonCopyable
 {
 public:
     explicit Timer(int32_t intervalMs, TimerCallBack cb, bool loop = false)
-        : m_bLoop(loop), m_iExpire(TimeUtil::getNowMs() + intervalMs), m_cb(std::move(cb)), m_intervalMs(intervalMs) {}
+        : m_bLoop(loop), m_iExpire(TimeUtil::getNowMs() + intervalMs), m_intervalMs(intervalMs), m_cb(std::move(cb)) {}
     ~Timer() {}
     void onTimer()
     {
         m_cb();
     }
-    void reStart()
+    void reStart(int64_t iNow)
     {
         if (m_bLoop)
         {
-            m_iExpire += m_intervalMs;
+            m_iExpire = iNow + m_intervalMs;
         }
     }
-    uint32_t getExpire() const
+    int64_t getExpire() const
     {
         return m_iExpire;
     }
 
+    bool loop()
+    {
+        return m_bLoop;
+    }
+
 private:
     bool m_bLoop;
-    uint32_t m_iExpire;
+    int64_t m_iExpire;
     int32_t m_intervalMs;
     TimerCallBack m_cb;
 };

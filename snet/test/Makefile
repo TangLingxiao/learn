@@ -127,6 +127,19 @@ test_poller/fast:
 	$(MAKE) -f CMakeFiles/test_poller.dir/build.make CMakeFiles/test_poller.dir/build
 .PHONY : test_poller/fast
 
+#=============================================================================
+# Target rules for targets named test_timerqueue
+
+# Build rule for target.
+test_timerqueue: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_timerqueue
+.PHONY : test_timerqueue
+
+# fast build rule for target.
+test_timerqueue/fast:
+	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/build
+.PHONY : test_timerqueue/fast
+
 test_eventloop.o: test_eventloop.cpp.o
 .PHONY : test_eventloop.o
 
@@ -175,6 +188,30 @@ test_poller.cpp.s:
 	$(MAKE) -f CMakeFiles/test_poller.dir/build.make CMakeFiles/test_poller.dir/test_poller.cpp.s
 .PHONY : test_poller.cpp.s
 
+test_timerqueue.o: test_timerqueue.cpp.o
+.PHONY : test_timerqueue.o
+
+# target to build an object file
+test_timerqueue.cpp.o:
+	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/test_timerqueue.cpp.o
+.PHONY : test_timerqueue.cpp.o
+
+test_timerqueue.i: test_timerqueue.cpp.i
+.PHONY : test_timerqueue.i
+
+# target to preprocess a source file
+test_timerqueue.cpp.i:
+	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/test_timerqueue.cpp.i
+.PHONY : test_timerqueue.cpp.i
+
+test_timerqueue.s: test_timerqueue.cpp.s
+.PHONY : test_timerqueue.s
+
+# target to generate assembly for a file
+test_timerqueue.cpp.s:
+	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/test_timerqueue.cpp.s
+.PHONY : test_timerqueue.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -185,12 +222,16 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test_eventloop"
 	@echo "... test_poller"
+	@echo "... test_timerqueue"
 	@echo "... test_eventloop.o"
 	@echo "... test_eventloop.i"
 	@echo "... test_eventloop.s"
 	@echo "... test_poller.o"
 	@echo "... test_poller.i"
 	@echo "... test_poller.s"
+	@echo "... test_timerqueue.o"
+	@echo "... test_timerqueue.i"
+	@echo "... test_timerqueue.s"
 .PHONY : help
 
 

@@ -138,6 +138,30 @@ base/logmgr.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/base/logmgr.cpp.s
 .PHONY : base/logmgr.cpp.s
 
+base/timerqueue.o: base/timerqueue.cpp.o
+.PHONY : base/timerqueue.o
+
+# target to build an object file
+base/timerqueue.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/base/timerqueue.cpp.o
+.PHONY : base/timerqueue.cpp.o
+
+base/timerqueue.i: base/timerqueue.cpp.i
+.PHONY : base/timerqueue.i
+
+# target to preprocess a source file
+base/timerqueue.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/base/timerqueue.cpp.i
+.PHONY : base/timerqueue.cpp.i
+
+base/timerqueue.s: base/timerqueue.cpp.s
+.PHONY : base/timerqueue.s
+
+# target to generate assembly for a file
+base/timerqueue.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/base/timerqueue.cpp.s
+.PHONY : base/timerqueue.cpp.s
+
 net/channel.o: net/channel.cpp.o
 .PHONY : net/channel.o
 
@@ -222,6 +246,9 @@ help:
 	@echo "... base/logmgr.o"
 	@echo "... base/logmgr.i"
 	@echo "... base/logmgr.s"
+	@echo "... base/timerqueue.o"
+	@echo "... base/timerqueue.i"
+	@echo "... base/timerqueue.s"
 	@echo "... net/channel.o"
 	@echo "... net/channel.i"
 	@echo "... net/channel.s"

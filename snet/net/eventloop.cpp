@@ -3,12 +3,12 @@
 #include "channel.h"
 #include "poller.h"
 #include <cassert>
-
+#include "base/timerqueue.h"
 thread_local EventLoop *t_loopInThisThread = nullptr;
 
 EventLoop::EventLoop()
+    : m_tId(std::this_thread::get_id()), m_poller(new Poller(this)), m_pTimerQueue(new TimerQueue(this))
 {
-    m_tId = std::this_thread::get_id();
     LOG_INFO("EventLoop created " << this << " in thread " << m_tId);
     if (t_loopInThisThread)
     {
@@ -18,15 +18,12 @@ EventLoop::EventLoop()
     {
         t_loopInThisThread = this;
     }
-    m_poller = new Poller(this);
 }
 
 EventLoop::~EventLoop()
 {
     assert(!m_bLooping);
     t_loopInThisThread = nullptr;
-    delete m_poller;
-    m_poller = nullptr;
 }
 
 EventLoop *EventLoop::getEventLoopOfCurrentThread()
@@ -67,4 +64,9 @@ void EventLoop::updateChannel(Channel *channel)
     assert(channel->getEventLoop() == this);
     assert(checkInLoopThread());
     m_poller->updateChannel(channel);
+}
+
+void EventLoop::runAfter(int32_t iExpireMs, TimerCallBack cb)
+{
+    m_pTimerQueue->addTimer(iExpireMs, std::move(cb));
 }
