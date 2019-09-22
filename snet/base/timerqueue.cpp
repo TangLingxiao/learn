@@ -7,11 +7,12 @@
 #include "net/eventloop.h"
 #include <memory.h>
 #include <sys/unistd.h>
+#include <cassert>
 
 TimerQueue::TimerQueue(EventLoop *loop)
     : m_pLoop(loop), m_iFd(::timerfd_create(CLOCK_REALTIME, TFD_NONBLOCK | TFD_CLOEXEC)), m_chan(new Channel(loop, m_iFd))
 {
-    m_chan->setReadCallback(std::bind(&TimerQueue::ReadCallBack, this));
+    m_chan->setReadCallback(std::bind(&TimerQueue::handleRead, this));
     m_chan->enableReading();
 }
 TimerQueue::~TimerQueue()
@@ -28,13 +29,14 @@ void TimerQueue::addTimer(double iSeconds, TimerCallBack cb, bool loop)
     m_pLoop->runInLoop(std::bind(&TimerQueue::addTimerInLoop, this, timer));
 }
 
-void TimerQueue::ReadCallBack()
+void TimerQueue::handleRead()
 {
+    assert(m_pLoop->inLoopThread());
     uint64_t iNum = 0;
     auto nLen = ::read(m_iFd, &iNum, sizeof iNum);
     if (nLen != sizeof iNum)
     {
-        LOG_ERROR("readcallback error");
+        LOG_ERROR("handleRead error");
     }
     auto iNow = TimeUtil::getNowMs();
     auto vExpired = getExpired(iNow);
@@ -47,6 +49,7 @@ void TimerQueue::ReadCallBack()
 
 void TimerQueue::addTimerInLoop(Timer *timer)
 {
+    assert(m_pLoop->inLoopThread());
     bool bReset = insertTimer(timer);
     if (bReset)
     {
