@@ -21,7 +21,7 @@ public:
         {
             return 0;
         }
-        return static_cast<int64_t>(time.tv_sec * 1000 + time.tv_usec / 1000);
+        return static_cast<int64_t>(time.tv_sec * kMicroSecondsPerSecond + time.tv_usec);
     }
     static int64_t getTimeDiff(int64_t time1, int64_t time2)
     {
@@ -36,18 +36,19 @@ public:
         char buf[32];
         time_t timet = time;
         tm result;
-        gmtime_r(&timet, &result);
-        snprintf(buf, sizeof buf, "%4d%02d%02d %02d:%02d:%02d",
+        localtime_r(&timet, &result);
+        snprintf(buf, sizeof buf, "%4d-%02d-%02d %02d:%02d:%02d",
                  result.tm_year + 1900, result.tm_mon + 1, result.tm_mday, result.tm_hour, result.tm_min, result.tm_sec);
         return buf;
     }
+    static const int64_t kMicroSecondsPerSecond = 1000 * 1000;
 };
 
 class Timer : public NonCopyable
 {
 public:
-    explicit Timer(int32_t intervalMs, TimerCallBack cb, bool loop = false)
-        : m_bLoop(loop), m_iExpire(TimeUtil::getNowMs() + intervalMs), m_intervalMs(intervalMs), m_cb(std::move(cb)) {}
+    explicit Timer(double iSecond, TimerCallBack cb, bool loop = false)
+        : m_bLoop(loop), m_iExpire(TimeUtil::getNowMs() + static_cast<int64_t>(TimeUtil::kMicroSecondsPerSecond * iSecond)), m_interval(iSecond), m_cb(std::move(cb)) {}
     ~Timer() {}
     void onTimer()
     {
@@ -57,7 +58,7 @@ public:
     {
         if (m_bLoop)
         {
-            m_iExpire = iNow + m_intervalMs;
+            m_iExpire = iNow + static_cast<int64_t>(m_interval * TimeUtil::kMicroSecondsPerSecond);
         }
     }
     int64_t getExpire() const
@@ -73,7 +74,7 @@ public:
 private:
     bool m_bLoop;
     int64_t m_iExpire;
-    int32_t m_intervalMs;
+    double m_interval;
     TimerCallBack m_cb;
 };
 

@@ -6,12 +6,31 @@
 #include <unistd.h>
 #include <string.h>
 EventLoop *g_loop = nullptr;
-void timeout()
+void timeout1()
 {
-    printf("Timeout\n");
-    g_loop->quit();
+    auto str = TimeUtil::formatTime(TimeUtil::getNow());
+    printf("timeout1 %s, %ld\n", str.c_str(), TimeUtil::getNowMs());
+    //    g_loop->quit();
 }
 
+void timeout2()
+{
+    auto str = TimeUtil::formatTime(TimeUtil::getNow());
+    printf("timeout2 %s, %ld\n", str.c_str(), TimeUtil::getNowMs());
+    //    g_loop->quit();
+}
+void timeout3()
+{
+    auto str = TimeUtil::formatTime(TimeUtil::getNow());
+    printf("timeout3 %s, %ld\n", str.c_str(), TimeUtil::getNowMs());
+    //    g_loop->quit();
+}
+void timeout4()
+{
+    auto str = TimeUtil::formatTime(TimeUtil::getNow());
+    printf("timeout4 %s, %ld\n", str.c_str(), TimeUtil::getNowMs());
+    g_loop->quit();
+}
 class Test : public App
 {
 public:
@@ -19,11 +38,12 @@ public:
     {
         EventLoop loop;
         g_loop = &loop;
-        g_loop->runAfter(10000, std::bind(&timeout));
-        auto iBegin = TimeUtil::getNowMs();
+        g_loop->runAfter(1, std::bind(&timeout1));
+        g_loop->runAfter(2.5, std::bind(&timeout2));
+        g_loop->runAfter(2, std::bind(&timeout3), true);
+        g_loop->runAfter(10, std::bind(&timeout4));
         g_loop->loop();
-        auto iEnd = TimeUtil::getNowMs();
-        printf("timeout: diff %ld\n", iEnd - iBegin);
+        g_loop->quit();
     }
 };
 

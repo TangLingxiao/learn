@@ -12,19 +12,20 @@ class Channel;
 
 class TimerQueue : public NonCopyable
 {
+    using Entry = std::pair<int64_t, Timer *>;
 public:
     TimerQueue(EventLoop *loop);
     ~TimerQueue();
-    void addTimer(int32_t intervalMs, TimerCallBack cb, bool loop = false);
+    void addTimer(double iSeconds, TimerCallBack cb, bool loop = false);
     void ReadCallBack();
     void addTimerInLoop(Timer *timer);
-    std::vector<std::pair<int64_t, Timer *>> getExpired(int64_t iNow);
+    std::vector<Entry> getExpired(int64_t iNow);
     void resetTimer(int64_t iExpireMs);
-    void reset(const std::vector<std::pair<int64_t, Timer *>> &vExpired, int64_t iNow);
+    void reset(const std::vector<Entry> &vExpired, int64_t iNow);
 
 private:
     bool insertTimer(Timer *timer);
-    using TimerSet = std::set<std::pair<int64_t, Timer *>>;
+    using TimerSet = std::set<Entry>;
     EventLoop *m_pLoop;
     int m_iFd;
     std::unique_ptr<Channel> m_chan;

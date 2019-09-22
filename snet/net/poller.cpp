@@ -36,7 +36,7 @@ uint32_t Poller::poll(int32_t timeout, ChannelList *activeChannels)
 void Poller::updateChannel(Channel *channel)
 {
     assert(channel != nullptr);
-    assert(m_pLoop->checkInLoopThread());
+    assert(m_pLoop->inLoopThread());
     LOG_INFO("fd = " << channel->fd() << " events = " << channel->events());
     if (channel->index() < 0)
     {

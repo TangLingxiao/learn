@@ -9,7 +9,7 @@ public:
     virtual ~App() {}
     virtual bool init()
     {
-        return LogMgr::getInstance().init("test.log", "./", false);
+        return LogMgr::getInstance().init("test.log", "./", true);
     }
     virtual void loop() {}
     virtual void fini()

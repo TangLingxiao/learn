@@ -102,50 +102,50 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_eventloop
+# Target rules for targets named test_eventloop.out
 
 # Build rule for target.
-test_eventloop: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_eventloop
-.PHONY : test_eventloop
+test_eventloop.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_eventloop.out
+.PHONY : test_eventloop.out
 
 # fast build rule for target.
-test_eventloop/fast:
-	$(MAKE) -f CMakeFiles/test_eventloop.dir/build.make CMakeFiles/test_eventloop.dir/build
-.PHONY : test_eventloop/fast
+test_eventloop.out/fast:
+	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/build
+.PHONY : test_eventloop.out/fast
 
 #=============================================================================
-# Target rules for targets named test_poller
+# Target rules for targets named test_poller.out
 
 # Build rule for target.
-test_poller: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_poller
-.PHONY : test_poller
+test_poller.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_poller.out
+.PHONY : test_poller.out
 
 # fast build rule for target.
-test_poller/fast:
-	$(MAKE) -f CMakeFiles/test_poller.dir/build.make CMakeFiles/test_poller.dir/build
-.PHONY : test_poller/fast
+test_poller.out/fast:
+	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/build
+.PHONY : test_poller.out/fast
 
 #=============================================================================
-# Target rules for targets named test_timerqueue
+# Target rules for targets named test_timerqueue.out
 
 # Build rule for target.
-test_timerqueue: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_timerqueue
-.PHONY : test_timerqueue
+test_timerqueue.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_timerqueue.out
+.PHONY : test_timerqueue.out
 
 # fast build rule for target.
-test_timerqueue/fast:
-	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/build
-.PHONY : test_timerqueue/fast
+test_timerqueue.out/fast:
+	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/build
+.PHONY : test_timerqueue.out/fast
 
 test_eventloop.o: test_eventloop.cpp.o
 .PHONY : test_eventloop.o
 
 # target to build an object file
 test_eventloop.cpp.o:
-	$(MAKE) -f CMakeFiles/test_eventloop.dir/build.make CMakeFiles/test_eventloop.dir/test_eventloop.cpp.o
+	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/test_eventloop.cpp.o
 .PHONY : test_eventloop.cpp.o
 
 test_eventloop.i: test_eventloop.cpp.i
@@ -153,7 +153,7 @@ test_eventloop.i: test_eventloop.cpp.i
 
 # target to preprocess a source file
 test_eventloop.cpp.i:
-	$(MAKE) -f CMakeFiles/test_eventloop.dir/build.make CMakeFiles/test_eventloop.dir/test_eventloop.cpp.i
+	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/test_eventloop.cpp.i
 .PHONY : test_eventloop.cpp.i
 
 test_eventloop.s: test_eventloop.cpp.s
@@ -161,7 +161,7 @@ test_eventloop.s: test_eventloop.cpp.s
 
 # target to generate assembly for a file
 test_eventloop.cpp.s:
-	$(MAKE) -f CMakeFiles/test_eventloop.dir/build.make CMakeFiles/test_eventloop.dir/test_eventloop.cpp.s
+	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/test_eventloop.cpp.s
 .PHONY : test_eventloop.cpp.s
 
 test_poller.o: test_poller.cpp.o
@@ -169,7 +169,7 @@ test_poller.o: test_poller.cpp.o
 
 # target to build an object file
 test_poller.cpp.o:
-	$(MAKE) -f CMakeFiles/test_poller.dir/build.make CMakeFiles/test_poller.dir/test_poller.cpp.o
+	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/test_poller.cpp.o
 .PHONY : test_poller.cpp.o
 
 test_poller.i: test_poller.cpp.i
@@ -177,7 +177,7 @@ test_poller.i: test_poller.cpp.i
 
 # target to preprocess a source file
 test_poller.cpp.i:
-	$(MAKE) -f CMakeFiles/test_poller.dir/build.make CMakeFiles/test_poller.dir/test_poller.cpp.i
+	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/test_poller.cpp.i
 .PHONY : test_poller.cpp.i
 
 test_poller.s: test_poller.cpp.s
@@ -185,7 +185,7 @@ test_poller.s: test_poller.cpp.s
 
 # target to generate assembly for a file
 test_poller.cpp.s:
-	$(MAKE) -f CMakeFiles/test_poller.dir/build.make CMakeFiles/test_poller.dir/test_poller.cpp.s
+	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/test_poller.cpp.s
 .PHONY : test_poller.cpp.s
 
 test_timerqueue.o: test_timerqueue.cpp.o
@@ -193,7 +193,7 @@ test_timerqueue.o: test_timerqueue.cpp.o
 
 # target to build an object file
 test_timerqueue.cpp.o:
-	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/test_timerqueue.cpp.o
+	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/test_timerqueue.cpp.o
 .PHONY : test_timerqueue.cpp.o
 
 test_timerqueue.i: test_timerqueue.cpp.i
@@ -201,7 +201,7 @@ test_timerqueue.i: test_timerqueue.cpp.i
 
 # target to preprocess a source file
 test_timerqueue.cpp.i:
-	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/test_timerqueue.cpp.i
+	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/test_timerqueue.cpp.i
 .PHONY : test_timerqueue.cpp.i
 
 test_timerqueue.s: test_timerqueue.cpp.s
@@ -209,7 +209,7 @@ test_timerqueue.s: test_timerqueue.cpp.s
 
 # target to generate assembly for a file
 test_timerqueue.cpp.s:
-	$(MAKE) -f CMakeFiles/test_timerqueue.dir/build.make CMakeFiles/test_timerqueue.dir/test_timerqueue.cpp.s
+	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/test_timerqueue.cpp.s
 .PHONY : test_timerqueue.cpp.s
 
 # Help Target
@@ -220,9 +220,9 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test_eventloop"
-	@echo "... test_poller"
-	@echo "... test_timerqueue"
+	@echo "... test_eventloop.out"
+	@echo "... test_poller.out"
+	@echo "... test_timerqueue.out"
 	@echo "... test_eventloop.o"
 	@echo "... test_eventloop.i"
 	@echo "... test_eventloop.s"
