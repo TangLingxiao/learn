@@ -210,6 +210,30 @@ net/eventloop.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloop.cpp.s
 .PHONY : net/eventloop.cpp.s
 
+net/eventloopthread.o: net/eventloopthread.cpp.o
+.PHONY : net/eventloopthread.o
+
+# target to build an object file
+net/eventloopthread.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloopthread.cpp.o
+.PHONY : net/eventloopthread.cpp.o
+
+net/eventloopthread.i: net/eventloopthread.cpp.i
+.PHONY : net/eventloopthread.i
+
+# target to preprocess a source file
+net/eventloopthread.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloopthread.cpp.i
+.PHONY : net/eventloopthread.cpp.i
+
+net/eventloopthread.s: net/eventloopthread.cpp.s
+.PHONY : net/eventloopthread.s
+
+# target to generate assembly for a file
+net/eventloopthread.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloopthread.cpp.s
+.PHONY : net/eventloopthread.cpp.s
+
 net/poller.o: net/poller.cpp.o
 .PHONY : net/poller.o
 
@@ -255,6 +279,9 @@ help:
 	@echo "... net/eventloop.o"
 	@echo "... net/eventloop.i"
 	@echo "... net/eventloop.s"
+	@echo "... net/eventloopthread.o"
+	@echo "... net/eventloopthread.i"
+	@echo "... net/eventloopthread.s"
 	@echo "... net/poller.o"
 	@echo "... net/poller.i"
 	@echo "... net/poller.s"

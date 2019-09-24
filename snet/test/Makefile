@@ -102,115 +102,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_eventloop.out
+# Target rules for targets named test_eventloopthread.out
 
 # Build rule for target.
-test_eventloop.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_eventloop.out
-.PHONY : test_eventloop.out
+test_eventloopthread.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_eventloopthread.out
+.PHONY : test_eventloopthread.out
 
 # fast build rule for target.
-test_eventloop.out/fast:
-	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/build
-.PHONY : test_eventloop.out/fast
+test_eventloopthread.out/fast:
+	$(MAKE) -f CMakeFiles/test_eventloopthread.out.dir/build.make CMakeFiles/test_eventloopthread.out.dir/build
+.PHONY : test_eventloopthread.out/fast
 
-#=============================================================================
-# Target rules for targets named test_poller.out
-
-# Build rule for target.
-test_poller.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_poller.out
-.PHONY : test_poller.out
-
-# fast build rule for target.
-test_poller.out/fast:
-	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/build
-.PHONY : test_poller.out/fast
-
-#=============================================================================
-# Target rules for targets named test_timerqueue.out
-
-# Build rule for target.
-test_timerqueue.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_timerqueue.out
-.PHONY : test_timerqueue.out
-
-# fast build rule for target.
-test_timerqueue.out/fast:
-	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/build
-.PHONY : test_timerqueue.out/fast
-
-test_eventloop.o: test_eventloop.cpp.o
-.PHONY : test_eventloop.o
+test_eventloopthread.o: test_eventloopthread.cpp.o
+.PHONY : test_eventloopthread.o
 
 # target to build an object file
-test_eventloop.cpp.o:
-	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/test_eventloop.cpp.o
-.PHONY : test_eventloop.cpp.o
+test_eventloopthread.cpp.o:
+	$(MAKE) -f CMakeFiles/test_eventloopthread.out.dir/build.make CMakeFiles/test_eventloopthread.out.dir/test_eventloopthread.cpp.o
+.PHONY : test_eventloopthread.cpp.o
 
-test_eventloop.i: test_eventloop.cpp.i
-.PHONY : test_eventloop.i
-
-# target to preprocess a source file
-test_eventloop.cpp.i:
-	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/test_eventloop.cpp.i
-.PHONY : test_eventloop.cpp.i
-
-test_eventloop.s: test_eventloop.cpp.s
-.PHONY : test_eventloop.s
-
-# target to generate assembly for a file
-test_eventloop.cpp.s:
-	$(MAKE) -f CMakeFiles/test_eventloop.out.dir/build.make CMakeFiles/test_eventloop.out.dir/test_eventloop.cpp.s
-.PHONY : test_eventloop.cpp.s
-
-test_poller.o: test_poller.cpp.o
-.PHONY : test_poller.o
-
-# target to build an object file
-test_poller.cpp.o:
-	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/test_poller.cpp.o
-.PHONY : test_poller.cpp.o
-
-test_poller.i: test_poller.cpp.i
-.PHONY : test_poller.i
+test_eventloopthread.i: test_eventloopthread.cpp.i
+.PHONY : test_eventloopthread.i
 
 # target to preprocess a source file
-test_poller.cpp.i:
-	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/test_poller.cpp.i
-.PHONY : test_poller.cpp.i
+test_eventloopthread.cpp.i:
+	$(MAKE) -f CMakeFiles/test_eventloopthread.out.dir/build.make CMakeFiles/test_eventloopthread.out.dir/test_eventloopthread.cpp.i
+.PHONY : test_eventloopthread.cpp.i
 
-test_poller.s: test_poller.cpp.s
-.PHONY : test_poller.s
-
-# target to generate assembly for a file
-test_poller.cpp.s:
-	$(MAKE) -f CMakeFiles/test_poller.out.dir/build.make CMakeFiles/test_poller.out.dir/test_poller.cpp.s
-.PHONY : test_poller.cpp.s
-
-test_timerqueue.o: test_timerqueue.cpp.o
-.PHONY : test_timerqueue.o
-
-# target to build an object file
-test_timerqueue.cpp.o:
-	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/test_timerqueue.cpp.o
-.PHONY : test_timerqueue.cpp.o
-
-test_timerqueue.i: test_timerqueue.cpp.i
-.PHONY : test_timerqueue.i
-
-# target to preprocess a source file
-test_timerqueue.cpp.i:
-	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/test_timerqueue.cpp.i
-.PHONY : test_timerqueue.cpp.i
-
-test_timerqueue.s: test_timerqueue.cpp.s
-.PHONY : test_timerqueue.s
+test_eventloopthread.s: test_eventloopthread.cpp.s
+.PHONY : test_eventloopthread.s
 
 # target to generate assembly for a file
-test_timerqueue.cpp.s:
-	$(MAKE) -f CMakeFiles/test_timerqueue.out.dir/build.make CMakeFiles/test_timerqueue.out.dir/test_timerqueue.cpp.s
-.PHONY : test_timerqueue.cpp.s
+test_eventloopthread.cpp.s:
+	$(MAKE) -f CMakeFiles/test_eventloopthread.out.dir/build.make CMakeFiles/test_eventloopthread.out.dir/test_eventloopthread.cpp.s
+.PHONY : test_eventloopthread.cpp.s
 
 # Help Target
 help:
@@ -220,18 +146,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test_eventloop.out"
-	@echo "... test_poller.out"
-	@echo "... test_timerqueue.out"
-	@echo "... test_eventloop.o"
-	@echo "... test_eventloop.i"
-	@echo "... test_eventloop.s"
-	@echo "... test_poller.o"
-	@echo "... test_poller.i"
-	@echo "... test_poller.s"
-	@echo "... test_timerqueue.o"
-	@echo "... test_timerqueue.i"
-	@echo "... test_timerqueue.s"
+	@echo "... test_eventloopthread.out"
+	@echo "... test_eventloopthread.o"
+	@echo "... test_eventloopthread.i"
+	@echo "... test_eventloopthread.s"
 .PHONY : help
 
 
