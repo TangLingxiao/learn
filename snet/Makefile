@@ -258,6 +258,54 @@ net/poller.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller.cpp.s
 .PHONY : net/poller.cpp.s
 
+net/poller/epollpoller.o: net/poller/epollpoller.cpp.o
+.PHONY : net/poller/epollpoller.o
+
+# target to build an object file
+net/poller/epollpoller.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller/epollpoller.cpp.o
+.PHONY : net/poller/epollpoller.cpp.o
+
+net/poller/epollpoller.i: net/poller/epollpoller.cpp.i
+.PHONY : net/poller/epollpoller.i
+
+# target to preprocess a source file
+net/poller/epollpoller.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller/epollpoller.cpp.i
+.PHONY : net/poller/epollpoller.cpp.i
+
+net/poller/epollpoller.s: net/poller/epollpoller.cpp.s
+.PHONY : net/poller/epollpoller.s
+
+# target to generate assembly for a file
+net/poller/epollpoller.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller/epollpoller.cpp.s
+.PHONY : net/poller/epollpoller.cpp.s
+
+net/poller/pollpoller.o: net/poller/pollpoller.cpp.o
+.PHONY : net/poller/pollpoller.o
+
+# target to build an object file
+net/poller/pollpoller.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller/pollpoller.cpp.o
+.PHONY : net/poller/pollpoller.cpp.o
+
+net/poller/pollpoller.i: net/poller/pollpoller.cpp.i
+.PHONY : net/poller/pollpoller.i
+
+# target to preprocess a source file
+net/poller/pollpoller.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller/pollpoller.cpp.i
+.PHONY : net/poller/pollpoller.cpp.i
+
+net/poller/pollpoller.s: net/poller/pollpoller.cpp.s
+.PHONY : net/poller/pollpoller.s
+
+# target to generate assembly for a file
+net/poller/pollpoller.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller/pollpoller.cpp.s
+.PHONY : net/poller/pollpoller.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -285,6 +333,12 @@ help:
 	@echo "... net/poller.o"
 	@echo "... net/poller.i"
 	@echo "... net/poller.s"
+	@echo "... net/poller/epollpoller.o"
+	@echo "... net/poller/epollpoller.i"
+	@echo "... net/poller/epollpoller.s"
+	@echo "... net/poller/pollpoller.o"
+	@echo "... net/poller/pollpoller.i"
+	@echo "... net/poller/pollpoller.s"
 .PHONY : help
 
 

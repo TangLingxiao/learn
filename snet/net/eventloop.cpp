@@ -1,7 +1,8 @@
 #include "eventloop.h"
 #include "base/logmgr.h"
 #include "channel.h"
-#include "poller.h"
+#include "net/poller/pollpoller.h"
+#include "net/poller/epollpoller.h"
 #include <cassert>
 #include "base/timerqueue.h"
 #include <sys/eventfd.h>
@@ -10,7 +11,7 @@
 thread_local EventLoop *t_loopInThisThread = nullptr;
 
 EventLoop::EventLoop()
-    : m_tId(std::this_thread::get_id()), m_poller(new Poller(this)), m_pTimerQueue(new TimerQueue(this)), m_iWakeupFd(::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC)), m_cWakeupChannel(new Channel(this, m_iWakeupFd)),m_bRunPendingFuncs(false)
+    : m_tId(std::this_thread::get_id()), m_poller(new EPollPoller(this)), m_pTimerQueue(new TimerQueue(this)), m_iWakeupFd(::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC)), m_cWakeupChannel(new Channel(this, m_iWakeupFd)),m_bRunPendingFuncs(false)
 {
     LOG_INFO("EventLoop created " << this << " in thread " << m_tId);
     if (t_loopInThisThread)
