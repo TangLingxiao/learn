@@ -17,7 +17,17 @@ void setsockopt(int fd, int level, int optname, const void *optval, socklen_t op
         LOG_ERROR("setsockopt error,optname: " << name);
     }
 }
-
+void logNewConnection(sockaddr *pAddr)
+{
+    if (pAddr == nullptr)
+    {
+        return;
+    }
+    const sockaddr_in *pAddrIn = static_cast<const sockaddr_in *>(static_cast<const void *>(pAddr));
+    std::string strIp = ::inet_ntoa(pAddrIn->sin_addr);
+    uint16_t iPort = ::ntohs(pAddrIn->sin_port);
+    LOG_DEBUG("new connection, ip:" << strIp << ", port:" << iPort);
+}
 Socket::Socket(int32_t iFd) : m_iFd(iFd)
 {
 }

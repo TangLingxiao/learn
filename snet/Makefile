@@ -162,6 +162,30 @@ base/timerqueue.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/base/timerqueue.cpp.s
 .PHONY : base/timerqueue.cpp.s
 
+net/accepter.o: net/accepter.cpp.o
+.PHONY : net/accepter.o
+
+# target to build an object file
+net/accepter.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/accepter.cpp.o
+.PHONY : net/accepter.cpp.o
+
+net/accepter.i: net/accepter.cpp.i
+.PHONY : net/accepter.i
+
+# target to preprocess a source file
+net/accepter.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/accepter.cpp.i
+.PHONY : net/accepter.cpp.i
+
+net/accepter.s: net/accepter.cpp.s
+.PHONY : net/accepter.s
+
+# target to generate assembly for a file
+net/accepter.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/accepter.cpp.s
+.PHONY : net/accepter.cpp.s
+
 net/channel.o: net/channel.cpp.o
 .PHONY : net/channel.o
 
@@ -369,6 +393,9 @@ help:
 	@echo "... base/timerqueue.o"
 	@echo "... base/timerqueue.i"
 	@echo "... base/timerqueue.s"
+	@echo "... net/accepter.o"
+	@echo "... net/accepter.i"
+	@echo "... net/accepter.s"
 	@echo "... net/channel.o"
 	@echo "... net/channel.i"
 	@echo "... net/channel.s"

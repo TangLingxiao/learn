@@ -8,6 +8,8 @@
 struct sockaddr;
 
 int32_t createSocketfd();
+void logNewConnection(sockaddr *pAddr);
+
 class Socket : public NonCopyable
 {
 public:
