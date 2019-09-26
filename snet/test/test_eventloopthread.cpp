@@ -18,7 +18,7 @@ public:
     void loop() override
     {
         EventLoopThread t;
-        auto pLoop = t.startEventLoop();
+        auto pLoop = t.getEventLoop();
         assert(pLoop != nullptr);
         pLoop->runAfter(5.5, std::bind(print, pLoop), false);
         usleep(5.5*1000*1000);

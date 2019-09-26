@@ -234,6 +234,30 @@ net/eventloopthread.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloopthread.cpp.s
 .PHONY : net/eventloopthread.cpp.s
 
+net/eventloopthreadpool.o: net/eventloopthreadpool.cpp.o
+.PHONY : net/eventloopthreadpool.o
+
+# target to build an object file
+net/eventloopthreadpool.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloopthreadpool.cpp.o
+.PHONY : net/eventloopthreadpool.cpp.o
+
+net/eventloopthreadpool.i: net/eventloopthreadpool.cpp.i
+.PHONY : net/eventloopthreadpool.i
+
+# target to preprocess a source file
+net/eventloopthreadpool.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloopthreadpool.cpp.i
+.PHONY : net/eventloopthreadpool.cpp.i
+
+net/eventloopthreadpool.s: net/eventloopthreadpool.cpp.s
+.PHONY : net/eventloopthreadpool.s
+
+# target to generate assembly for a file
+net/eventloopthreadpool.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/eventloopthreadpool.cpp.s
+.PHONY : net/eventloopthreadpool.cpp.s
+
 net/poller.o: net/poller.cpp.o
 .PHONY : net/poller.o
 
@@ -306,6 +330,30 @@ net/poller/pollpoller.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/poller/pollpoller.cpp.s
 .PHONY : net/poller/pollpoller.cpp.s
 
+net/socket.o: net/socket.cpp.o
+.PHONY : net/socket.o
+
+# target to build an object file
+net/socket.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/socket.cpp.o
+.PHONY : net/socket.cpp.o
+
+net/socket.i: net/socket.cpp.i
+.PHONY : net/socket.i
+
+# target to preprocess a source file
+net/socket.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/socket.cpp.i
+.PHONY : net/socket.cpp.i
+
+net/socket.s: net/socket.cpp.s
+.PHONY : net/socket.s
+
+# target to generate assembly for a file
+net/socket.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/socket.cpp.s
+.PHONY : net/socket.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -330,6 +378,9 @@ help:
 	@echo "... net/eventloopthread.o"
 	@echo "... net/eventloopthread.i"
 	@echo "... net/eventloopthread.s"
+	@echo "... net/eventloopthreadpool.o"
+	@echo "... net/eventloopthreadpool.i"
+	@echo "... net/eventloopthreadpool.s"
 	@echo "... net/poller.o"
 	@echo "... net/poller.i"
 	@echo "... net/poller.s"
@@ -339,6 +390,9 @@ help:
 	@echo "... net/poller/pollpoller.o"
 	@echo "... net/poller/pollpoller.i"
 	@echo "... net/poller/pollpoller.s"
+	@echo "... net/socket.o"
+	@echo "... net/socket.i"
+	@echo "... net/socket.s"
 .PHONY : help
 
 

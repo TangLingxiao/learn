@@ -46,5 +46,8 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/test SOURCE_FILES)
 # ADD_EXECUTABLE(test_timerqueue.out ${CMAKE_CURRENT_SOURCE_DIR}/test_timerqueue.cpp)
 # target_link_libraries(test_timerqueue.out snet)
 
-ADD_EXECUTABLE(test_eventloopthread.out ${CMAKE_CURRENT_SOURCE_DIR}/test_eventloopthread.cpp)
-target_link_libraries(test_eventloopthread.out snet)
+# ADD_EXECUTABLE(test_eventloopthread.out ${CMAKE_CURRENT_SOURCE_DIR}/test_eventloopthread.cpp)
+# target_link_libraries(test_eventloopthread.out snet)
+
+ADD_EXECUTABLE(test_eventloopthreadpool.out ${CMAKE_CURRENT_SOURCE_DIR}/test_eventloopthreadpool.cpp)
+target_link_libraries(test_eventloopthreadpool.out snet)

@@ -13,13 +13,15 @@ class EventLoopThread : public NonCopyable
 public:
     EventLoopThread();
     ~EventLoopThread();
-    EventLoop* startEventLoop();
+    EventLoop *getEventLoop();
+
 private:
     void threadFunc();
+
 private:
     std::mutex m_mtx;
     std::condition_variable m_cond;
-    EventLoop* m_pLoop;
-    std::thread m_thread;
+    EventLoop *m_pLoop;
+    std::thread *m_thread;
 };
 #endif

@@ -2,7 +2,7 @@
 #include "eventloop.h"
 #include <thread>
 
-EventLoopThread::EventLoopThread() : m_mtx(), m_cond(), m_pLoop(nullptr), m_thread(std::thread(&EventLoopThread::threadFunc, this))
+EventLoopThread::EventLoopThread() : m_mtx(), m_cond(), m_pLoop(nullptr), m_thread(new std::thread(&EventLoopThread::threadFunc, this))
 {
 }
 
@@ -12,13 +12,13 @@ EventLoopThread::~EventLoopThread()
     {
         m_pLoop->quit();
     }
-    if (m_thread.joinable())
+    if (m_thread->joinable())
     {
-        m_thread.join();
+        m_thread->join();
     }
 }
 
-EventLoop *EventLoopThread::startEventLoop()
+EventLoop *EventLoopThread::getEventLoop()
 {
     EventLoop *loop = nullptr;
     {
