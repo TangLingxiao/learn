@@ -52,5 +52,5 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/test SOURCE_FILES)
 # ADD_EXECUTABLE(test_eventloopthreadpool.out ${CMAKE_CURRENT_SOURCE_DIR}/test_eventloopthreadpool.cpp)
 # target_link_libraries(test_eventloopthreadpool.out snet)
 
-ADD_EXECUTABLE(test_accepter.out ${CMAKE_CURRENT_SOURCE_DIR}/test_accepter.cpp)
-target_link_libraries(test_accepter.out snet)
+ADD_EXECUTABLE(test_acceptor.out ${CMAKE_CURRENT_SOURCE_DIR}/test_acceptor.cpp)
+target_link_libraries(test_acceptor.out snet)

@@ -1,4 +1,4 @@
-#include "accepter.h"
+#include "acceptor.h"
 #include "socket.h"
 #include "channel.h"
 #include "eventloop.h"
@@ -9,24 +9,24 @@
 #include <unistd.h>
 #include <netinet/in.h>
 
-Accepter::Accepter(EventLoop *loop, const std::string &strIp, uint16_t iPort)
+Acceptor::Acceptor(EventLoop *loop, const std::string &strIp, uint16_t iPort)
     : m_pLoop(loop), m_pSock(new Socket(createSocketfd())), m_pChannel(new Channel(m_pLoop, m_pSock->fd()))
 {
     m_pSock->setReuse(true);
     m_pSock->setTcpNoDelay(true);
     assert(m_pSock->bind(strIp, iPort));
-    m_pChannel->setReadCallback(std::bind(&Accepter::handleRead, this));
+    m_pChannel->setReadCallback(std::bind(&Acceptor::handleRead, this));
 }
-Accepter::~Accepter()
+Acceptor::~Acceptor()
 {
 }
 
-void Accepter::listen()
+void Acceptor::listen()
 {
     m_pSock->listen();
     m_pChannel->enableReading();
 }
-void Accepter::handleRead()
+void Acceptor::handleRead()
 {
     assert(m_pLoop->inLoopThread());
     sockaddr_in oAddr;
@@ -46,10 +46,10 @@ void Accepter::handleRead()
     }
     else
     {
-        LOG_ERROR("accepter handleread error");
+        LOG_ERROR("acceptor handleread error");
     }
 }
-void Accepter::setNewConnectionCb(newConnectionCallBack cb)
+void Acceptor::setNewConnectionCb(newConnectionCallBack cb)
 {
     m_cb = std::move(cb);
 }

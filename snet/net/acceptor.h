@@ -10,12 +10,12 @@ class Socket;
 class Channel;
 class EventLoop;
 struct sockaddr_in;
-class Accepter : public NonCopyable
+class Acceptor : public NonCopyable
 {
 public:
     using newConnectionCallBack = std::function<void(int32_t iFd, sockaddr_in *addr)>;
-    Accepter(EventLoop *loop, const std::string &strIp, uint16_t iPort);
-    ~Accepter();
+    Acceptor(EventLoop *loop, const std::string &strIp, uint16_t iPort);
+    ~Acceptor();
     void listen();
     void handleRead();
     void setNewConnectionCb(newConnectionCallBack cb);

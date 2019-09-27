@@ -102,41 +102,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_accepter.out
+# Target rules for targets named test_acceptor.out
 
 # Build rule for target.
-test_accepter.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_accepter.out
-.PHONY : test_accepter.out
+test_acceptor.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_acceptor.out
+.PHONY : test_acceptor.out
 
 # fast build rule for target.
-test_accepter.out/fast:
-	$(MAKE) -f CMakeFiles/test_accepter.out.dir/build.make CMakeFiles/test_accepter.out.dir/build
-.PHONY : test_accepter.out/fast
+test_acceptor.out/fast:
+	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/build
+.PHONY : test_acceptor.out/fast
 
-test_accepter.o: test_accepter.cpp.o
-.PHONY : test_accepter.o
+test_acceptor.o: test_acceptor.cpp.o
+.PHONY : test_acceptor.o
 
 # target to build an object file
-test_accepter.cpp.o:
-	$(MAKE) -f CMakeFiles/test_accepter.out.dir/build.make CMakeFiles/test_accepter.out.dir/test_accepter.cpp.o
-.PHONY : test_accepter.cpp.o
+test_acceptor.cpp.o:
+	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/test_acceptor.cpp.o
+.PHONY : test_acceptor.cpp.o
 
-test_accepter.i: test_accepter.cpp.i
-.PHONY : test_accepter.i
+test_acceptor.i: test_acceptor.cpp.i
+.PHONY : test_acceptor.i
 
 # target to preprocess a source file
-test_accepter.cpp.i:
-	$(MAKE) -f CMakeFiles/test_accepter.out.dir/build.make CMakeFiles/test_accepter.out.dir/test_accepter.cpp.i
-.PHONY : test_accepter.cpp.i
+test_acceptor.cpp.i:
+	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/test_acceptor.cpp.i
+.PHONY : test_acceptor.cpp.i
 
-test_accepter.s: test_accepter.cpp.s
-.PHONY : test_accepter.s
+test_acceptor.s: test_acceptor.cpp.s
+.PHONY : test_acceptor.s
 
 # target to generate assembly for a file
-test_accepter.cpp.s:
-	$(MAKE) -f CMakeFiles/test_accepter.out.dir/build.make CMakeFiles/test_accepter.out.dir/test_accepter.cpp.s
-.PHONY : test_accepter.cpp.s
+test_acceptor.cpp.s:
+	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/test_acceptor.cpp.s
+.PHONY : test_acceptor.cpp.s
 
 # Help Target
 help:
@@ -146,10 +146,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test_accepter.out"
-	@echo "... test_accepter.o"
-	@echo "... test_accepter.i"
-	@echo "... test_accepter.s"
+	@echo "... test_acceptor.out"
+	@echo "... test_acceptor.o"
+	@echo "... test_acceptor.i"
+	@echo "... test_acceptor.s"
 .PHONY : help
 
 

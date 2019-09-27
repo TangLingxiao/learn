@@ -1,4 +1,4 @@
-#include "net/accepter.h"
+#include "net/acceptor.h"
 #include "base/logmgr.h"
 #include "net/eventloop.h"
 #include "base/application.h"
@@ -15,9 +15,9 @@ public:
     void loop() override
     {
         EventLoop t;
-        Accepter ap(&t, "172.19.130.180", 6666);
+        Acceptor ap(&t, "172.19.130.180", 6666);
         ap.setNewConnectionCb(std::bind(&newConnectionCb, std::placeholders::_1, std::placeholders::_2, &t));
-        t.runInLoop(std::bind(&Accepter::listen, &ap));
+        t.runInLoop(std::bind(&Acceptor::listen, &ap));
         t.loop();
     }
 };
