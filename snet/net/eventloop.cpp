@@ -79,9 +79,9 @@ void EventLoop::updateChannel(Channel *channel)
     m_poller->updateChannel(channel);
 }
 
-void EventLoop::runAfter(double iSeconds, TimerCallBack cb, bool loop)
+void EventLoop::runAfter(double iSeconds, TimerCallBack cb, bool bloop)
 {
-    m_pTimerQueue->addTimer(iSeconds, std::move(cb), loop);
+    m_pTimerQueue->addTimer(iSeconds, std::move(cb), bloop);
 }
 
 void EventLoop::runInLoop(Functor cb)

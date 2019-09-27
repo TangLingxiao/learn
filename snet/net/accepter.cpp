@@ -7,6 +7,7 @@
 #include <sys/socket.h>
 #include <memory.h>
 #include <unistd.h>
+#include <netinet/in.h>
 
 Accepter::Accepter(EventLoop *loop, const std::string &strIp, uint16_t iPort)
     : m_pLoop(loop), m_pSock(new Socket(createSocketfd())), m_pChannel(new Channel(m_pLoop, m_pSock->fd()))
@@ -28,11 +29,9 @@ void Accepter::listen()
 void Accepter::handleRead()
 {
     assert(m_pLoop->inLoopThread());
-    sockaddr oAddr;
+    sockaddr_in oAddr;
     memset(&oAddr, 0, sizeof oAddr);
-    socklen_t iLen = 0;
-    int32_t iFd = m_pSock->accept(&oAddr, &iLen);
-    (void)iLen;
+    int32_t iFd = m_pSock->accept(&oAddr);
     if (iFd > 0)
     {
         if (m_cb)

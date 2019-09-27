@@ -5,11 +5,10 @@
 #include "base/noncopyable.h"
 #include <string>
 
-struct sockaddr;
+struct sockaddr_in;
 
 int32_t createSocketfd();
-void logNewConnection(sockaddr *pAddr);
-
+void logNewConnection(sockaddr_in *pAddr);
 class Socket : public NonCopyable
 {
 public:
@@ -17,7 +16,7 @@ public:
     ~Socket();
     bool bind(const std::string &strIp, uint16_t iPort);
     bool listen();
-    int32_t accept(sockaddr *addr, socklen_t *addrlen);
+    int32_t accept(sockaddr_in *addr);
     void setTcpNoDelay(bool on);
     void setReuse(bool on);
     void setKeepAlive(bool on);

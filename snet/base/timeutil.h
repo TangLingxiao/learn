@@ -47,8 +47,8 @@ public:
 class Timer : public NonCopyable
 {
 public:
-    explicit Timer(double iSecond, TimerCallBack cb, bool loop = false)
-        : m_bLoop(loop), m_iExpire(TimeUtil::getNowMs() + static_cast<int64_t>(TimeUtil::kMicroSecondsPerSecond * iSecond)), m_interval(iSecond), m_cb(std::move(cb)) {}
+    explicit Timer(double iSecond, TimerCallBack cb, bool bloop = false)
+        : m_bLoop(bloop), m_iExpire(TimeUtil::getNowMs() + static_cast<int64_t>(TimeUtil::kMicroSecondsPerSecond * iSecond)), m_interval(iSecond), m_cb(std::move(cb)) {}
     ~Timer() {}
     void onTimer()
     {

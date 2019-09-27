@@ -23,7 +23,7 @@ public:
     bool inLoopThread();
     void quit();
     void updateChannel(Channel *channel);
-    void runAfter(double iSeconds, TimerCallBack cb, bool loop = false);
+    void runAfter(double iSeconds, TimerCallBack cb, bool bloop = false);
     void runInLoop(Functor cb);
 
 private:

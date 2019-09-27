@@ -17,17 +17,18 @@ void setsockopt(int fd, int level, int optname, const void *optval, socklen_t op
         LOG_ERROR("setsockopt error,optname: " << name);
     }
 }
-void logNewConnection(sockaddr *pAddr)
+void logNewConnection(sockaddr_in *pAddr)
 {
     if (pAddr == nullptr)
     {
         return;
     }
-    const sockaddr_in *pAddrIn = static_cast<const sockaddr_in *>(static_cast<const void *>(pAddr));
-    std::string strIp = ::inet_ntoa(pAddrIn->sin_addr);
-    uint16_t iPort = ::ntohs(pAddrIn->sin_port);
+    //const sockaddr_in *pAddrIn = static_cast<const sockaddr_in *>(static_cast<const void *>(pAddr));
+    std::string strIp = ::inet_ntoa(pAddr->sin_addr);
+    uint16_t iPort = ::ntohs(pAddr->sin_port);
     LOG_DEBUG("new connection, ip:" << strIp << ", port:" << iPort);
 }
+
 Socket::Socket(int32_t iFd) : m_iFd(iFd)
 {
 }
@@ -64,9 +65,10 @@ bool Socket::listen()
     }
     return true;
 }
-int32_t Socket::accept(sockaddr *addr, socklen_t *addrlen)
+int32_t Socket::accept(sockaddr_in *addr)
 {
-    return ::accept4(m_iFd, addr, addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
+    socklen_t addrlen = sizeof(sockaddr);
+    return ::accept4(m_iFd, static_cast<sockaddr*>(static_cast<void*>(addr)), &addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
 }
 
 void Socket::setTcpNoDelay(bool on)
