@@ -54,3 +54,6 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/test SOURCE_FILES)
 
 ADD_EXECUTABLE(test_acceptor.out ${CMAKE_CURRENT_SOURCE_DIR}/test_acceptor.cpp)
 target_link_libraries(test_acceptor.out snet)
+
+ADD_EXECUTABLE(test_connector.out ${CMAKE_CURRENT_SOURCE_DIR}/test_connector.cpp)
+target_link_libraries(test_connector.out snet)

@@ -14,7 +14,7 @@ Acceptor::Acceptor(EventLoop *loop, const std::string &strIp, uint16_t iPort)
 {
     m_pSock->setReuse(true);
     m_pSock->setTcpNoDelay(true);
-    assert(m_pSock->bind(strIp, iPort));
+    assert(m_pSock->bind(InetAddr(strIp, iPort)));
     m_pChannel->setReadCallback(std::bind(&Acceptor::handleRead, this));
 }
 Acceptor::~Acceptor()
@@ -29,15 +29,14 @@ void Acceptor::listen()
 void Acceptor::handleRead()
 {
     assert(m_pLoop->inLoopThread());
-    sockaddr_in oAddr;
-    memset(&oAddr, 0, sizeof oAddr);
+    InetAddr oAddr;
     int32_t iFd = m_pSock->accept(&oAddr);
     if (iFd > 0)
     {
         if (m_cb)
         {
             m_cb(iFd, &oAddr);
-            logNewConnection(&oAddr);
+            LOG_INFO("new connection," << oAddr.toString());
         }
         else
         {

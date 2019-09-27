@@ -114,6 +114,19 @@ test_acceptor.out/fast:
 	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/build
 .PHONY : test_acceptor.out/fast
 
+#=============================================================================
+# Target rules for targets named test_connector.out
+
+# Build rule for target.
+test_connector.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_connector.out
+.PHONY : test_connector.out
+
+# fast build rule for target.
+test_connector.out/fast:
+	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/build
+.PHONY : test_connector.out/fast
+
 test_acceptor.o: test_acceptor.cpp.o
 .PHONY : test_acceptor.o
 
@@ -138,6 +151,30 @@ test_acceptor.cpp.s:
 	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/test_acceptor.cpp.s
 .PHONY : test_acceptor.cpp.s
 
+test_connector.o: test_connector.cpp.o
+.PHONY : test_connector.o
+
+# target to build an object file
+test_connector.cpp.o:
+	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/test_connector.cpp.o
+.PHONY : test_connector.cpp.o
+
+test_connector.i: test_connector.cpp.i
+.PHONY : test_connector.i
+
+# target to preprocess a source file
+test_connector.cpp.i:
+	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/test_connector.cpp.i
+.PHONY : test_connector.cpp.i
+
+test_connector.s: test_connector.cpp.s
+.PHONY : test_connector.s
+
+# target to generate assembly for a file
+test_connector.cpp.s:
+	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/test_connector.cpp.s
+.PHONY : test_connector.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -147,9 +184,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test_acceptor.out"
+	@echo "... test_connector.out"
 	@echo "... test_acceptor.o"
 	@echo "... test_acceptor.i"
 	@echo "... test_acceptor.s"
+	@echo "... test_connector.o"
+	@echo "... test_connector.i"
+	@echo "... test_connector.s"
 .PHONY : help
 
 

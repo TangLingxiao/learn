@@ -210,6 +210,30 @@ net/channel.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/channel.cpp.s
 .PHONY : net/channel.cpp.s
 
+net/connetor.o: net/connetor.cpp.o
+.PHONY : net/connetor.o
+
+# target to build an object file
+net/connetor.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/connetor.cpp.o
+.PHONY : net/connetor.cpp.o
+
+net/connetor.i: net/connetor.cpp.i
+.PHONY : net/connetor.i
+
+# target to preprocess a source file
+net/connetor.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/connetor.cpp.i
+.PHONY : net/connetor.cpp.i
+
+net/connetor.s: net/connetor.cpp.s
+.PHONY : net/connetor.s
+
+# target to generate assembly for a file
+net/connetor.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/connetor.cpp.s
+.PHONY : net/connetor.cpp.s
+
 net/eventloop.o: net/eventloop.cpp.o
 .PHONY : net/eventloop.o
 
@@ -399,6 +423,9 @@ help:
 	@echo "... net/channel.o"
 	@echo "... net/channel.i"
 	@echo "... net/channel.s"
+	@echo "... net/connetor.o"
+	@echo "... net/connetor.i"
+	@echo "... net/connetor.s"
 	@echo "... net/eventloop.o"
 	@echo "... net/eventloop.i"
 	@echo "... net/eventloop.s"

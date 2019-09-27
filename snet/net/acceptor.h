@@ -8,12 +8,13 @@
 
 class Socket;
 class Channel;
+class InetAddr;
 class EventLoop;
-struct sockaddr_in;
+
 class Acceptor : public NonCopyable
 {
 public:
-    using newConnectionCallBack = std::function<void(int32_t iFd, sockaddr_in *addr)>;
+    using newConnectionCallBack = std::function<void(int32_t iFd, InetAddr *addr)>;
     Acceptor(EventLoop *loop, const std::string &strIp, uint16_t iPort);
     ~Acceptor();
     void listen();

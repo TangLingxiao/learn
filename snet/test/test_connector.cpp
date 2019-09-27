@@ -1,9 +1,9 @@
-#include "net/acceptor.h"
+#include "net/connector.h"
 #include "base/logmgr.h"
 #include "net/eventloop.h"
 #include "base/application.h"
 #include "net/socket.h"
-void newConnectionCb(int32_t iFd, InetAddr *addr, EventLoop *loop)
+void newConnectionCb(EventLoop *loop)
 {
     LOG_INFO("==================newconnection===============");
     //loop->quit();
@@ -14,9 +14,9 @@ public:
     void loop() override
     {
         EventLoop t;
-        Acceptor ap(&t, "172.19.130.180", 6666);
-        ap.setNewConnectionCb(std::bind(&newConnectionCb, std::placeholders::_1, std::placeholders::_2, &t));
-        t.runInLoop(std::bind(&Acceptor::listen, &ap));
+        Connector co(&t);
+        co.setNewConnectionCb(std::bind(&newConnectionCb, &t));
+        co.start("172.19.130.180", 6666);
         t.loop();
     }
 };
