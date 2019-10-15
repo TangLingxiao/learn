@@ -31,9 +31,9 @@ public:
 		{
 			m_cond.wait(lock);
 		}
-		T front(std::move(m_queue.front()));
+		T front(m_queue.front());
 		m_queue.pop_front();
-		return std::move(front);
+		return front;
 	}
 
 	size_t size()

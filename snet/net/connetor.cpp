@@ -8,18 +8,22 @@
 Connector::Connector(EventLoop *loop) : m_pLoop(loop), m_pChannel(new Channel(m_pLoop, -1)), m_cb()
 {
 }
+
 Connector::~Connector()
 {
 }
+
 void Connector::setNewConnectionCb(newConnectionCallBack cb)
 {
     m_cb = std::move(cb);
 }
+
 void Connector::start(const std::string &strIp, uint16_t iPort)
 {
     assert(m_pLoop != nullptr);
     m_pLoop->runInLoop(std::bind(&Connector::connect, this, InetAddr(strIp, iPort)));
 }
+
 void Connector::connect(const InetAddr &oAddr)
 {
     assert(m_pLoop != nullptr);

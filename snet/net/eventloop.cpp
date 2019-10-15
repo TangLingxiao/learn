@@ -11,7 +11,7 @@
 thread_local EventLoop *t_loopInThisThread = nullptr;
 
 EventLoop::EventLoop()
-    : m_tId(std::this_thread::get_id()), m_poller(new EPollPoller(this)), m_pTimerQueue(new TimerQueue(this)), m_iWakeupFd(::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC)), m_cWakeupChannel(new Channel(this, m_iWakeupFd)),m_bRunPendingFuncs(false)
+    : m_tId(std::this_thread::get_id()), m_poller(new EPollPoller(this)), m_pTimerQueue(new TimerQueue(this)), m_iWakeupFd(::eventfd(0, EFD_NONBLOCK | EFD_CLOEXEC)), m_cWakeupChannel(new Channel(this, m_iWakeupFd)), m_bRunPendingFuncs(false)
 {
     LOG_INFO("EventLoop created " << this << " in thread " << m_tId);
     if (t_loopInThisThread)
@@ -66,7 +66,7 @@ void EventLoop::quit()
 {
     m_bQuit = true;
     //非io线程quit时,需要wakeup
-    if(!inLoopThread())
+    if (!inLoopThread())
     {
         wakeupWakeChannel();
     }
@@ -77,6 +77,13 @@ void EventLoop::updateChannel(Channel *channel)
     assert(channel->getEventLoop() == this);
     assert(inLoopThread());
     m_poller->updateChannel(channel);
+}
+void EventLoop::removeChannel(Channel *channel)
+{
+    assert(channel != nullptr);
+    assert(channel->getEventLoop() == this);
+    assert(inLoopThread());
+    m_poller->removeChannel(channel);
 }
 
 void EventLoop::runAfter(double iSeconds, TimerCallBack cb, bool bloop)
@@ -102,7 +109,7 @@ void EventLoop::queueInLoop(Functor cb)
         std::lock_guard<std::mutex> lock(m_mtx);
         m_vPendingFuncs.emplace_back(std::move(cb));
     }
-    
+
     //m_bRunPendingFuncs当runAllPending中调用queueInloop时需要wakeup
     //handleevent调用queueinloop不需要wakeup，因为之后会调用runallpending
     if (!inLoopThread() || m_bRunPendingFuncs)

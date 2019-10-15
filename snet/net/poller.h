@@ -15,7 +15,7 @@ public:
     virtual ~Poller() {}
 
     virtual void updateChannel(Channel *channel) = 0;
-
+    virtual void removeChannel(Channel *channel) = 0;
     virtual uint32_t poll(int32_t timeout, ChannelList *activeChannels) = 0;
     bool inLoopThread();
 

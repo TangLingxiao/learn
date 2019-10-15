@@ -14,6 +14,7 @@ class InetAddr
 public:
     InetAddr();
     InetAddr(const std::string &strIp, uint16_t iPort);
+    InetAddr(const InetAddr &oAddr);
     ~InetAddr();
     std::string toString() const;
     const sockaddr *getSockaddr() const;

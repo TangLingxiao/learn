@@ -34,8 +34,11 @@ InetAddr::InetAddr(const std::string &strIp, uint16_t iPort) : m_oAddr()
     m_oAddr.sin_port = ::htons(iPort);
     m_oAddr.sin_addr.s_addr = ::inet_addr(strIp.c_str());
 }
+InetAddr::InetAddr(const InetAddr &oAddr) : m_oAddr(oAddr.m_oAddr)
+{
+}
 
-std::string InetAddr::toString()const
+std::string InetAddr::toString() const
 {
     std::string strIp = ::inet_ntoa(m_oAddr.sin_addr);
     uint16_t iPort = ::ntohs(m_oAddr.sin_port);

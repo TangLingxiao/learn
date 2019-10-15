@@ -10,19 +10,22 @@
 #include <netinet/in.h>
 
 Acceptor::Acceptor(EventLoop *loop, const std::string &strIp, uint16_t iPort)
-    : m_pLoop(loop), m_pSock(new Socket(createSocketfd())), m_pChannel(new Channel(m_pLoop, m_pSock->fd()))
+    : m_pLoop(loop), m_pSock(new Socket(createSocketfd())), m_pChannel(new Channel(m_pLoop, m_pSock->fd())), m_bListening(false)
 {
     m_pSock->setReuse(true);
     m_pSock->setTcpNoDelay(true);
     assert(m_pSock->bind(InetAddr(strIp, iPort)));
     m_pChannel->setReadCallback(std::bind(&Acceptor::handleRead, this));
 }
+
 Acceptor::~Acceptor()
 {
 }
 
 void Acceptor::listen()
 {
+    assert(m_pLoop->inLoopThread());
+    m_bListening = true;
     m_pSock->listen();
     m_pChannel->enableReading();
 }

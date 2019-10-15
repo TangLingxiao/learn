@@ -17,8 +17,26 @@ void Channel::update()
 {
     m_pLoop->updateChannel(this);
 }
-
+void Channel::remove()
+{
+    m_pLoop->removeChannel(this);
+}
 void Channel::handleEvent()
+{
+    if (m_bTied)
+    {
+        auto pTie = m_pTie.lock();
+        if (pTie)
+        {
+            handleEventWithGuard();
+        }
+    }
+    else
+    {
+        handleEventWithGuard();
+    }
+}
+void Channel::handleEventWithGuard()
 {
     if (m_iREvents & POLLNVAL)
     {
@@ -45,4 +63,10 @@ void Channel::handleEvent()
             m_fWriteCallback();
         }
     }
+}
+
+void Channel::tie(const std::shared_ptr<void> &pTie)
+{
+    m_bTied = true;
+    m_pTie = pTie;
 }

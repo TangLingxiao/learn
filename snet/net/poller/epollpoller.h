@@ -11,11 +11,11 @@ public:
     ~EPollPoller();
 
     void updateChannel(Channel *channel) override;
-
+    void removeChannel(Channel *channel) override;
     uint32_t poll(int32_t timeout, ChannelList *activeChannels) override;
 
 private:
-    void update(int32_t iOp, Channel* channel);
+    void update(int32_t iOp, Channel *channel);
     void fillActiveChannels(int32_t iEvents, ChannelList *activeChannels) const override;
     using EpollFdList = std::vector<epoll_event>;
     EpollFdList m_vEpollfds;

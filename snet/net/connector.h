@@ -19,8 +19,11 @@ public:
     ~Connector();
     void setNewConnectionCb(newConnectionCallBack cb);
     void start(const std::string &strIp, uint16_t iPort);
-    void connect(const InetAddr &oAddr);
+
     void handleWrite();
+
+private:
+    void connect(const InetAddr &oAddr);
 
 private:
     EventLoop *m_pLoop;

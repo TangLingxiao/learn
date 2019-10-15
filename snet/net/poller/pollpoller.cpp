@@ -84,3 +84,27 @@ void PollPoller::fillActiveChannels(int32_t iEvents, ChannelList *activeChannels
         }
     }
 }
+
+void PollPoller::removeChannel(Channel *channel)
+{
+    assert(channel != nullptr);
+    assert(Poller::inLoopThread());
+
+    assert(m_mChannels.find(channel->fd()) != m_mChannels.end());
+    assert(m_mChannels[channel->fd()] == channel);
+    int32_t idx = channel->index();
+    assert(idx >= 0 && idx < static_cast<int32_t>(m_vPollfds.size()));
+    auto &fd = m_vPollfds[idx];
+    assert(fd.fd == channel->fd() || fd.fd == -1);
+    m_mChannels.erase(channel->fd());
+    if (static_cast<size_t>(idx) == m_vPollfds.size() - 1)
+    {
+        m_vPollfds.pop_back();
+    }
+    else
+    {
+        std::iter_swap(m_vPollfds.begin() + idx, m_vPollfds.end() - 1);
+        m_mChannels[m_vPollfds[idx].fd]->setIndex(idx);
+        m_vPollfds.pop_back();
+    }
+}

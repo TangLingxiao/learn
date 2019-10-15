@@ -11,7 +11,7 @@ public:
     ~PollPoller();
 
     void updateChannel(Channel *channel) override;
-
+    void removeChannel(Channel *channel) override;
     uint32_t poll(int32_t timeout, ChannelList *activeChannels) override;
 
 private:

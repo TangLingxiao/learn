@@ -20,11 +20,13 @@ public:
     void listen();
     void handleRead();
     void setNewConnectionCb(newConnectionCallBack cb);
+    bool listening() { return m_bListening; }
 
 private:
     EventLoop *m_pLoop;
     std::unique_ptr<Socket> m_pSock;
     std::unique_ptr<Channel> m_pChannel;
+    bool m_bListening;
     newConnectionCallBack m_cb;
 };
 #endif

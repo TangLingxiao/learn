@@ -102,78 +102,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_acceptor.out
+# Target rules for targets named test_tcpserver.out
 
 # Build rule for target.
-test_acceptor.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_acceptor.out
-.PHONY : test_acceptor.out
+test_tcpserver.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_tcpserver.out
+.PHONY : test_tcpserver.out
 
 # fast build rule for target.
-test_acceptor.out/fast:
-	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/build
-.PHONY : test_acceptor.out/fast
+test_tcpserver.out/fast:
+	$(MAKE) -f CMakeFiles/test_tcpserver.out.dir/build.make CMakeFiles/test_tcpserver.out.dir/build
+.PHONY : test_tcpserver.out/fast
 
-#=============================================================================
-# Target rules for targets named test_connector.out
-
-# Build rule for target.
-test_connector.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_connector.out
-.PHONY : test_connector.out
-
-# fast build rule for target.
-test_connector.out/fast:
-	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/build
-.PHONY : test_connector.out/fast
-
-test_acceptor.o: test_acceptor.cpp.o
-.PHONY : test_acceptor.o
+test_tcpserver.o: test_tcpserver.cpp.o
+.PHONY : test_tcpserver.o
 
 # target to build an object file
-test_acceptor.cpp.o:
-	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/test_acceptor.cpp.o
-.PHONY : test_acceptor.cpp.o
+test_tcpserver.cpp.o:
+	$(MAKE) -f CMakeFiles/test_tcpserver.out.dir/build.make CMakeFiles/test_tcpserver.out.dir/test_tcpserver.cpp.o
+.PHONY : test_tcpserver.cpp.o
 
-test_acceptor.i: test_acceptor.cpp.i
-.PHONY : test_acceptor.i
-
-# target to preprocess a source file
-test_acceptor.cpp.i:
-	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/test_acceptor.cpp.i
-.PHONY : test_acceptor.cpp.i
-
-test_acceptor.s: test_acceptor.cpp.s
-.PHONY : test_acceptor.s
-
-# target to generate assembly for a file
-test_acceptor.cpp.s:
-	$(MAKE) -f CMakeFiles/test_acceptor.out.dir/build.make CMakeFiles/test_acceptor.out.dir/test_acceptor.cpp.s
-.PHONY : test_acceptor.cpp.s
-
-test_connector.o: test_connector.cpp.o
-.PHONY : test_connector.o
-
-# target to build an object file
-test_connector.cpp.o:
-	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/test_connector.cpp.o
-.PHONY : test_connector.cpp.o
-
-test_connector.i: test_connector.cpp.i
-.PHONY : test_connector.i
+test_tcpserver.i: test_tcpserver.cpp.i
+.PHONY : test_tcpserver.i
 
 # target to preprocess a source file
-test_connector.cpp.i:
-	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/test_connector.cpp.i
-.PHONY : test_connector.cpp.i
+test_tcpserver.cpp.i:
+	$(MAKE) -f CMakeFiles/test_tcpserver.out.dir/build.make CMakeFiles/test_tcpserver.out.dir/test_tcpserver.cpp.i
+.PHONY : test_tcpserver.cpp.i
 
-test_connector.s: test_connector.cpp.s
-.PHONY : test_connector.s
+test_tcpserver.s: test_tcpserver.cpp.s
+.PHONY : test_tcpserver.s
 
 # target to generate assembly for a file
-test_connector.cpp.s:
-	$(MAKE) -f CMakeFiles/test_connector.out.dir/build.make CMakeFiles/test_connector.out.dir/test_connector.cpp.s
-.PHONY : test_connector.cpp.s
+test_tcpserver.cpp.s:
+	$(MAKE) -f CMakeFiles/test_tcpserver.out.dir/build.make CMakeFiles/test_tcpserver.out.dir/test_tcpserver.cpp.s
+.PHONY : test_tcpserver.cpp.s
 
 # Help Target
 help:
@@ -183,14 +146,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test_acceptor.out"
-	@echo "... test_connector.out"
-	@echo "... test_acceptor.o"
-	@echo "... test_acceptor.i"
-	@echo "... test_acceptor.s"
-	@echo "... test_connector.o"
-	@echo "... test_connector.i"
-	@echo "... test_connector.s"
+	@echo "... test_tcpserver.out"
+	@echo "... test_tcpserver.o"
+	@echo "... test_tcpserver.i"
+	@echo "... test_tcpserver.s"
 .PHONY : help
 
 

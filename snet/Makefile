@@ -402,6 +402,54 @@ net/socket.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/socket.cpp.s
 .PHONY : net/socket.cpp.s
 
+net/tcpconnection.o: net/tcpconnection.cpp.o
+.PHONY : net/tcpconnection.o
+
+# target to build an object file
+net/tcpconnection.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpconnection.cpp.o
+.PHONY : net/tcpconnection.cpp.o
+
+net/tcpconnection.i: net/tcpconnection.cpp.i
+.PHONY : net/tcpconnection.i
+
+# target to preprocess a source file
+net/tcpconnection.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpconnection.cpp.i
+.PHONY : net/tcpconnection.cpp.i
+
+net/tcpconnection.s: net/tcpconnection.cpp.s
+.PHONY : net/tcpconnection.s
+
+# target to generate assembly for a file
+net/tcpconnection.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpconnection.cpp.s
+.PHONY : net/tcpconnection.cpp.s
+
+net/tcpserver.o: net/tcpserver.cpp.o
+.PHONY : net/tcpserver.o
+
+# target to build an object file
+net/tcpserver.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpserver.cpp.o
+.PHONY : net/tcpserver.cpp.o
+
+net/tcpserver.i: net/tcpserver.cpp.i
+.PHONY : net/tcpserver.i
+
+# target to preprocess a source file
+net/tcpserver.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpserver.cpp.i
+.PHONY : net/tcpserver.cpp.i
+
+net/tcpserver.s: net/tcpserver.cpp.s
+.PHONY : net/tcpserver.s
+
+# target to generate assembly for a file
+net/tcpserver.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpserver.cpp.s
+.PHONY : net/tcpserver.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -447,6 +495,12 @@ help:
 	@echo "... net/socket.o"
 	@echo "... net/socket.i"
 	@echo "... net/socket.s"
+	@echo "... net/tcpconnection.o"
+	@echo "... net/tcpconnection.i"
+	@echo "... net/tcpconnection.s"
+	@echo "... net/tcpserver.o"
+	@echo "... net/tcpserver.i"
+	@echo "... net/tcpserver.s"
 .PHONY : help
 
 

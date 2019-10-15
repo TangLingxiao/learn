@@ -61,7 +61,7 @@ bool TimerQueue::insertTimer(Timer *timer)
 {
     assert(timer != nullptr);
     bool bReset = m_setTimers.empty() || m_setTimers.begin()->first > timer->getExpire();
-    m_setTimers.emplace(std::move(std::make_pair(timer->getExpire(), timer)));
+    m_setTimers.emplace(std::make_pair(timer->getExpire(), timer));
     return bReset;
 }
 

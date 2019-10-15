@@ -4,16 +4,23 @@
 #include <functional>
 #include "base/noncopyable.h"
 #include "base/callback.h"
+#include <memory>
 class EventLoop;
 
 class Channel : public NonCopyable
 {
 public:
+    enum EpollChannelState
+    {
+        E_NEW = -1,
+        E_ADDED = 1,
+        E_DELETED = 2,
+    };
     Channel(EventLoop *loop, int32_t iFd);
     void handleEvent();
-    void setReadCallback(const EventCallback &cb) { m_fReadCallback = cb; }
-    void setWriteCallback(const EventCallback &cb) { m_fWriteCallback = cb; }
-    void setErrorCallback(const EventCallback &cb) { m_fErrorCallback = cb; }
+    void setReadCallback(const EventCallBack &cb) { m_fReadCallback = cb; }
+    void setWriteCallback(const EventCallBack &cb) { m_fWriteCallback = cb; }
+    void setErrorCallback(const EventCallBack &cb) { m_fErrorCallback = cb; }
     int32_t fd() { return m_iFd; }
     int32_t events() { return m_iEvents; }
     void setREvents(int32_t revt) { m_iREvents = revt; }
@@ -49,8 +56,11 @@ public:
     void setIndex(int32_t idx) { m_index = idx; }
     EventLoop *getEventLoop() { return m_pLoop; }
 
+    void tie(const std::shared_ptr<void> &pTie);
+    void remove();
 private:
     void update();
+    void handleEventWithGuard();
     static const int32_t m_iNoneEvent;
     static const int32_t m_iReadEvent;
     static const int32_t m_iWriteEvent;
@@ -60,8 +70,10 @@ private:
     int32_t m_iREvents = 0; // actually occurred
     int32_t m_index = -1;// poll vector index
 
-    EventCallback m_fReadCallback = nullptr;
-    EventCallback m_fWriteCallback = nullptr;
-    EventCallback m_fErrorCallback = nullptr;
+    bool m_bTied = false;
+    std::weak_ptr<void> m_pTie{};
+    EventCallBack m_fReadCallback = nullptr;
+    EventCallBack m_fWriteCallback = nullptr;
+    EventCallBack m_fErrorCallback = nullptr;
 };
 #endif
