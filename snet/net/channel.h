@@ -25,7 +25,8 @@ public:
     int32_t events() { return m_iEvents; }
     void setREvents(int32_t revt) { m_iREvents = revt; }
     bool isNoneEvent() { return m_iEvents == m_iNoneEvent; }
-
+    bool isReading() { return m_iEvents & m_iReadEvent; }
+    bool isWriting() { return m_iEvents & m_iWriteEvent; }
     void enableReading()
     {
         m_iEvents |= m_iReadEvent;

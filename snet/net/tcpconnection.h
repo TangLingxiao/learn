@@ -26,6 +26,7 @@ public:
 
 private:
     void handleRead();
+    void handleWrite();
     void handleClose();
     void sendInLoop(const std::string& strMsg);
 private:
