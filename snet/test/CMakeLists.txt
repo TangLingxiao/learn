@@ -60,3 +60,6 @@ AUX_SOURCE_DIRECTORY(${CMAKE_CURRENT_SOURCE_DIR}/test SOURCE_FILES)
 
 ADD_EXECUTABLE(test_tcpserver.out ${CMAKE_CURRENT_SOURCE_DIR}/test_tcpserver.cpp)
 target_link_libraries(test_tcpserver.out snet)
+
+ADD_EXECUTABLE(test_tcpclient.out ${CMAKE_CURRENT_SOURCE_DIR}/test_tcpclient.cpp)
+target_link_libraries(test_tcpclient.out snet)

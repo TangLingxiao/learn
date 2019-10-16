@@ -7,7 +7,7 @@
 #include <cassert>
 
 TcpServer::TcpServer(EventLoop *loop, const std::string &strIp, uint16_t iPort, const std::string &strName)
-    : m_pLoop(loop), m_pAcceptor(new Acceptor(loop, strIp, iPort)), m_bStarted(false), m_strName(strName), m_mapConnections(), m_MsgCb()
+    : m_pLoop(loop), m_pAcceptor(new Acceptor(loop, strIp, iPort)), m_bStarted(false), m_strName(strName), m_mapConnections(), m_MsgCb(), m_ConnedCb()
 {
     m_pAcceptor->setNewConnectionCb(std::bind(&TcpServer::newConnection, this, std::placeholders::_1, std::placeholders::_2));
 }
@@ -28,11 +28,14 @@ void TcpServer::setMsgCallBack(MsgCallBack cb)
 {
     m_MsgCb = std::move(cb);
 }
-
-void TcpServer::newConnection(int32_t iFd, InetAddr *addr)
+void TcpServer::setConnectedCallBack(ConnectedCallBack cb)
 {
-    std::string strConnName = m_strName + addr->toString();
-    TcpConnectionPtr pConnection(new TcpConnection(m_pLoop, strConnName, iFd, *addr));
+    m_ConnedCb = std::move(cb);
+}
+void TcpServer::newConnection(int32_t iFd, const InetAddr &addr)
+{
+    std::string strConnName = m_strName + addr.toString();
+    TcpConnectionPtr pConnection(new TcpConnection(m_pLoop, strConnName, iFd, addr));
     m_mapConnections[strConnName] = pConnection;
     LOG_DEBUG("new connection, name:" << strConnName);
     pConnection->setMsgCallBack(m_MsgCb);
@@ -52,5 +55,5 @@ void TcpServer::removeConnection(const TcpConnectionPtr &pConn)
     const auto &strName = pConn->getName();
     m_mapConnections.erase(strName);
     LOG_INFO("removeConnection,name:" << strName);
-    pLoop->runInLoop(std::bind(&TcpConnection::connectDestroyed, pConn));
+    pLoop->queueInLoop(std::bind(&TcpConnection::connectDestroyed, pConn));
 }

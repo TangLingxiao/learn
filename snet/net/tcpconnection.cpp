@@ -6,7 +6,7 @@
 #include "base/logmgr.h"
 
 TcpConnection::TcpConnection(EventLoop *pLoop, const std::string &strName, int32_t iFd, const InetAddr &oAddr)
-    : m_pLoop(pLoop), m_strName(strName), m_oPeerAddr(oAddr), m_pChannel(new Channel(pLoop, iFd)), m_oSock(iFd), m_strRecvBuf(), m_strSendBuf(), m_MsgCb(), m_CloseCb()
+    : m_pLoop(pLoop), m_strName(strName), m_oPeerAddr(oAddr), m_pChannel(new Channel(pLoop, iFd)), m_oSock(iFd), m_strRecvBuf(), m_strSendBuf(), m_MsgCb(), m_CloseCb(),m_ConnedCb()
 {
     m_pChannel->setReadCallback(std::bind(&TcpConnection::handleRead, this));
     m_oSock.setKeepAlive(true);
@@ -27,9 +27,20 @@ void TcpConnection::setCloseCallBack(CloseCallBack cb)
     m_CloseCb = std::move(cb);
 }
 
+void TcpConnection::setConnectedCallBack(ConnectedCallBack cb)
+{
+    m_ConnedCb = std::move(cb);
+}
+
 void TcpConnection::send(const std::string &strMsg)
 {
-    auto n = ::write(m_oSock.fd(), strMsg.c_str(), strMsg.size());
+    m_pLoop->runInLoop(std::bind(&TcpConnection::sendInLoop, shared_from_this(), strMsg));
+}
+
+void TcpConnection::sendInLoop(const std::string &strMsg)
+{
+    assert(m_pLoop->inLoopThread());
+    size_t n = ::write(m_oSock.fd(), strMsg.c_str(), strMsg.size());
     if (n != strMsg.size())
     {
         LOG_ERROR("TcpConnection send error");
@@ -42,6 +53,10 @@ void TcpConnection::connectEstablished()
 
     m_pChannel->tie(shared_from_this());
     m_pChannel->enableReading();
+    if(m_ConnedCb)
+    {
+        m_ConnedCb(shared_from_this());
+    }
 }
 
 void TcpConnection::handleRead()

@@ -18,9 +18,9 @@ public:
     };
     Channel(EventLoop *loop, int32_t iFd);
     void handleEvent();
-    void setReadCallback(const EventCallBack &cb) { m_fReadCallback = cb; }
-    void setWriteCallback(const EventCallBack &cb) { m_fWriteCallback = cb; }
-    void setErrorCallback(const EventCallBack &cb) { m_fErrorCallback = cb; }
+    void setReadCallback(EventCallBack cb) { m_fReadCallback = std::move(cb); }
+    void setWriteCallback(EventCallBack cb) { m_fWriteCallback = std::move(cb); }
+    void setErrorCallback(EventCallBack cb) { m_fErrorCallback = std::move(cb); }
     int32_t fd() { return m_iFd; }
     int32_t events() { return m_iEvents; }
     void setREvents(int32_t revt) { m_iREvents = revt; }
@@ -58,6 +58,7 @@ public:
 
     void tie(const std::shared_ptr<void> &pTie);
     void remove();
+
 private:
     void update();
     void handleEventWithGuard();
@@ -68,7 +69,7 @@ private:
     const int32_t m_iFd = -1;
     int32_t m_iEvents = 0;  // poller cares about
     int32_t m_iREvents = 0; // actually occurred
-    int32_t m_index = -1;// poll vector index
+    int32_t m_index = -1;   // poll vector index
 
     bool m_bTied = false;
     std::weak_ptr<void> m_pTie{};

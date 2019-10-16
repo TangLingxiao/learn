@@ -18,9 +18,10 @@ public:
     ~TcpServer();
     void start();
     void setMsgCallBack(MsgCallBack cb);
-    void disconnect(const TcpConnectionPtr & pConn);
+    void setConnectedCallBack(ConnectedCallBack cb);
 private:
-    void newConnection(int32_t iFd, InetAddr *addr);
+    void disconnect(const TcpConnectionPtr & pConn);
+    void newConnection(int32_t iFd, const InetAddr &addr);
     void removeConnection(const TcpConnectionPtr & pConn);
     EventLoop *m_pLoop;
     std::unique_ptr<Acceptor> m_pAcceptor;
@@ -28,5 +29,6 @@ private:
     std::string m_strName;
     std::map<std::string, TcpConnectionPtr> m_mapConnections;
     MsgCallBack m_MsgCb;
+    ConnectedCallBack m_ConnedCb;
 };
 #endif

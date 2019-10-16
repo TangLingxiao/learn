@@ -32,13 +32,17 @@ public:
     bool bind(const InetAddr &oAddr);
     bool listen();
     int32_t accept(InetAddr *pAddr);
-    bool connect(const InetAddr &oAddr);
     void setTcpNoDelay(bool on);
     void setReuse(bool on);
     void setKeepAlive(bool on);
     int32_t fd() { return m_iFd; }
 
 private:
-    int32_t m_iFd;
+    int32_t m_iFd = -1;
 };
+
+namespace sockets
+{
+bool connect(int32_t iFd, const InetAddr &oAddr);
+}
 #endif

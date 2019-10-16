@@ -5,6 +5,7 @@
 #include <memory>
 #include <functional>
 #include <string>
+#include "base/callback.h"
 
 // class Socket;
 class Channel;
@@ -14,17 +15,16 @@ class EventLoop;
 class Connector : public NonCopyable
 {
 public:
-    using newConnectionCallBack = std::function<void()>;
     Connector(EventLoop *loop);
     ~Connector();
     void setNewConnectionCb(newConnectionCallBack cb);
     void start(const std::string &strIp, uint16_t iPort);
-
-    void handleWrite();
+    void handleWrite(const InetAddr &addr);
 
 private:
     void connect(const InetAddr &oAddr);
-
+    int32_t removeAndResetChannel();
+    void resetChannel();
 private:
     EventLoop *m_pLoop;
     // std::unique_ptr<Socket> m_pSock;

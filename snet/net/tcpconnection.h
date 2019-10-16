@@ -17,6 +17,7 @@ public:
     ~TcpConnection();
     void setMsgCallBack(MsgCallBack cb);
     void setCloseCallBack(CloseCallBack cb);
+    void setConnectedCallBack(ConnectedCallBack cb);
     void send(const std::string& strMsg);
     EventLoop *getLoop() { return m_pLoop; }
     const std::string &getName() { return m_strName; }
@@ -26,7 +27,7 @@ public:
 private:
     void handleRead();
     void handleClose();
-
+    void sendInLoop(const std::string& strMsg);
 private:
     EventLoop *m_pLoop;
     const std::string m_strName;
@@ -37,5 +38,6 @@ private:
     std::string m_strSendBuf;
     MsgCallBack m_MsgCb;
     CloseCallBack m_CloseCb;
+    ConnectedCallBack m_ConnedCb;
 };
 #endif

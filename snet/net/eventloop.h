@@ -26,10 +26,10 @@ public:
     void removeChannel(Channel *channel);
     void runAfter(double iSeconds, TimerCallBack cb, bool bloop = false);
     void runInLoop(Functor cb);
+    void queueInLoop(Functor cb);
 
 private:
     using PendingFuncs = std::vector<Functor>;
-    void queueInLoop(Functor cb);
     void handleReadWakeChannel();
     void wakeupWakeChannel();
     void runAllPending();

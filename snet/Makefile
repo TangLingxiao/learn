@@ -402,6 +402,30 @@ net/socket.cpp.s:
 	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/socket.cpp.s
 .PHONY : net/socket.cpp.s
 
+net/tcpclient.o: net/tcpclient.cpp.o
+.PHONY : net/tcpclient.o
+
+# target to build an object file
+net/tcpclient.cpp.o:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpclient.cpp.o
+.PHONY : net/tcpclient.cpp.o
+
+net/tcpclient.i: net/tcpclient.cpp.i
+.PHONY : net/tcpclient.i
+
+# target to preprocess a source file
+net/tcpclient.cpp.i:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpclient.cpp.i
+.PHONY : net/tcpclient.cpp.i
+
+net/tcpclient.s: net/tcpclient.cpp.s
+.PHONY : net/tcpclient.s
+
+# target to generate assembly for a file
+net/tcpclient.cpp.s:
+	$(MAKE) -f CMakeFiles/snet.dir/build.make CMakeFiles/snet.dir/net/tcpclient.cpp.s
+.PHONY : net/tcpclient.cpp.s
+
 net/tcpconnection.o: net/tcpconnection.cpp.o
 .PHONY : net/tcpconnection.o
 
@@ -495,6 +519,9 @@ help:
 	@echo "... net/socket.o"
 	@echo "... net/socket.i"
 	@echo "... net/socket.s"
+	@echo "... net/tcpclient.o"
+	@echo "... net/tcpclient.i"
+	@echo "... net/tcpclient.s"
 	@echo "... net/tcpconnection.o"
 	@echo "... net/tcpconnection.i"
 	@echo "... net/tcpconnection.s"

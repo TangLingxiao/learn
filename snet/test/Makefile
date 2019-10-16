@@ -102,6 +102,19 @@ depend:
 .PHONY : depend
 
 #=============================================================================
+# Target rules for targets named test_tcpclient.out
+
+# Build rule for target.
+test_tcpclient.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_tcpclient.out
+.PHONY : test_tcpclient.out
+
+# fast build rule for target.
+test_tcpclient.out/fast:
+	$(MAKE) -f CMakeFiles/test_tcpclient.out.dir/build.make CMakeFiles/test_tcpclient.out.dir/build
+.PHONY : test_tcpclient.out/fast
+
+#=============================================================================
 # Target rules for targets named test_tcpserver.out
 
 # Build rule for target.
@@ -113,6 +126,30 @@ test_tcpserver.out: cmake_check_build_system
 test_tcpserver.out/fast:
 	$(MAKE) -f CMakeFiles/test_tcpserver.out.dir/build.make CMakeFiles/test_tcpserver.out.dir/build
 .PHONY : test_tcpserver.out/fast
+
+test_tcpclient.o: test_tcpclient.cpp.o
+.PHONY : test_tcpclient.o
+
+# target to build an object file
+test_tcpclient.cpp.o:
+	$(MAKE) -f CMakeFiles/test_tcpclient.out.dir/build.make CMakeFiles/test_tcpclient.out.dir/test_tcpclient.cpp.o
+.PHONY : test_tcpclient.cpp.o
+
+test_tcpclient.i: test_tcpclient.cpp.i
+.PHONY : test_tcpclient.i
+
+# target to preprocess a source file
+test_tcpclient.cpp.i:
+	$(MAKE) -f CMakeFiles/test_tcpclient.out.dir/build.make CMakeFiles/test_tcpclient.out.dir/test_tcpclient.cpp.i
+.PHONY : test_tcpclient.cpp.i
+
+test_tcpclient.s: test_tcpclient.cpp.s
+.PHONY : test_tcpclient.s
+
+# target to generate assembly for a file
+test_tcpclient.cpp.s:
+	$(MAKE) -f CMakeFiles/test_tcpclient.out.dir/build.make CMakeFiles/test_tcpclient.out.dir/test_tcpclient.cpp.s
+.PHONY : test_tcpclient.cpp.s
 
 test_tcpserver.o: test_tcpserver.cpp.o
 .PHONY : test_tcpserver.o
@@ -146,7 +183,11 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
+	@echo "... test_tcpclient.out"
 	@echo "... test_tcpserver.out"
+	@echo "... test_tcpclient.o"
+	@echo "... test_tcpclient.i"
+	@echo "... test_tcpclient.s"
 	@echo "... test_tcpserver.o"
 	@echo "... test_tcpserver.i"
 	@echo "... test_tcpserver.s"

@@ -97,17 +97,6 @@ int32_t Socket::accept(InetAddr *pAddr)
     return ::accept4(m_iFd, pAddr->getSockaddr(), &addrlen, SOCK_NONBLOCK | SOCK_CLOEXEC);
 }
 
-bool Socket::connect(const InetAddr &oAddr)
-{
-    int32_t iRet = ::connect(m_iFd, oAddr.getSockaddr(), sizeof(sockaddr_in));
-    if (iRet != 0 && errno != EINPROGRESS)
-    {
-        LOG_ERROR("connect error, errno:" << errno);
-        return false;
-    }
-    return true;
-}
-
 void Socket::setTcpNoDelay(bool on)
 {
     int32_t op = on ? 1 : 0;
@@ -125,4 +114,15 @@ void Socket::setKeepAlive(bool on)
 {
     int32_t op = on ? 1 : 0;
     setsockopt(m_iFd, SOL_SOCKET, SO_KEEPALIVE, &op, sizeof op, "setKeepAlive");
+}
+
+bool sockets::connect(int32_t iFd, const InetAddr &oAddr)
+{
+    int32_t iRet = ::connect(iFd, oAddr.getSockaddr(), sizeof(sockaddr_in));
+    if (iRet != 0 && errno != EINPROGRESS)
+    {
+        LOG_ERROR("connect error, errno:" << errno);
+        return false;
+    }
+    return true;
 }

@@ -38,7 +38,7 @@ void Acceptor::handleRead()
     {
         if (m_cb)
         {
-            m_cb(iFd, &oAddr);
+            m_cb(iFd, oAddr);
             LOG_INFO("new connection," << oAddr.toString());
         }
         else

@@ -5,6 +5,7 @@
 #include <memory>
 #include <string>
 #include <functional>
+#include "base/callback.h"
 
 class Socket;
 class Channel;
@@ -14,7 +15,6 @@ class EventLoop;
 class Acceptor : public NonCopyable
 {
 public:
-    using newConnectionCallBack = std::function<void(int32_t iFd, InetAddr *addr)>;
     Acceptor(EventLoop *loop, const std::string &strIp, uint16_t iPort);
     ~Acceptor();
     void listen();
