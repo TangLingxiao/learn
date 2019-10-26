@@ -5,7 +5,7 @@
 #include "net/socket.h"
 #include "net/tcpconnection.h"
 #include "net/eventloop.h"
-void onMessage(const TcpConnectionPtr &pConn, const std::string &strMsg, TcpClient * pClient, EventLoop *loop)
+void onMessage(const TcpConnectionPtr &pConn, const std::string &strMsg, TcpClient *pClient, EventLoop *loop)
 {
     LOG_DEBUG("onMessage:" << strMsg);
     loop->quit();
@@ -16,7 +16,9 @@ class Test : public App
 public:
     void onConnected(const TcpConnectionPtr &pConn, const std::string &strMsg)
     {
-        pConn->send(strMsg);
+        std::string strOut;
+        pConn->packMsg(strMsg, strOut);
+        pConn->send(strOut);
     }
     void loop() override
     {

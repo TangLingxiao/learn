@@ -8,14 +8,15 @@ from url_parser import UrlParser
 import threading
 import time
 import random
+import datetime
 
 class Wenku():
     def __init__(self):
         self.authority = r'https://www.wenku8.net'
         self.loginurl = r'https://www.wenku8.net/login.php?do=submit&jumpurl=http%3A%2F%2Fwww.wenku8.net%2Findex.php'
         self.pageurl = r"/modules/article/articlelist.php?page="
-        self.username = r'username'
-        self.password = r'password'
+        self.username = r''
+        self.password = r''
 
         self.formdata = {}
         self.formdata['username'] = self.username
@@ -81,8 +82,11 @@ class Wenku():
         
 
 if __name__ == '__main__':
+    begin = datetime.datetime.now()
     conn = Wenku()
     if conn.login():
-        #conn.Run()
-        conn.load_and_download()
+        conn.Run()
+        #conn.load_and_download()
     print('done!')
+    end = datetime.datetime.now()
+    print (end-begin)

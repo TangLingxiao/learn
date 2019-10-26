@@ -50,3 +50,7 @@ CMakeFiles/
 # Makefile
 algo
 cmake_install.cmake
+go/src/github.com/*
+go/src/golang.org/*
+go/pkg/*
+go/bin/*

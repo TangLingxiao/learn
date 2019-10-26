@@ -8,7 +8,9 @@
 void onMessage(const TcpConnectionPtr &pConn, const std::string &strMsg)
 {
     LOG_DEBUG("onMessage:" << strMsg);
-    pConn->send(strMsg);
+    std::string strOut;
+    pConn->packMsg(strMsg, strOut);
+    pConn->send(strOut);
 }
 
 class Test : public App

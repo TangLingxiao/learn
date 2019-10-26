@@ -77,6 +77,35 @@ void TcpConnection::connectEstablished()
     }
 }
 
+void TcpConnection::packMsg(const std::string &strMsg, std::string &strMsgOut)
+{
+    uint32_t iHeaderLen = static_cast<uint32_t>(sizeof(uint32_t) + strMsg.size());
+    strMsgOut.reserve(iHeaderLen);
+    iHeaderLen = htonl(iHeaderLen);
+    strMsgOut.append((char *)&iHeaderLen, sizeof iHeaderLen);
+    strMsgOut.append(strMsg);
+}
+
+int32_t TcpConnection::parserMsg(uint32_t &iHeaderLen, std::string &strMsg)
+{
+    size_t iLen = m_strRecvBuf.size();
+    if (iLen < sizeof(uint32_t))
+    {
+        return PACKEAGE_LESS;
+    }
+    iHeaderLen = ntohl(*(uint32_t *)m_strRecvBuf.c_str());
+    if (iHeaderLen < sizeof(uint32_t) || iHeaderLen > 100 * 1024 * 1024)
+    {
+        return PACKEAGE_ERROR;
+    }
+    if (iLen < iHeaderLen)
+    {
+        return PACKEAGE_LESS;
+    }
+    strMsg.assign(m_strRecvBuf.c_str() + sizeof(uint32_t), m_strRecvBuf.c_str() + iHeaderLen);
+    return PACKEAGE_FULL;
+}
+
 void TcpConnection::handleRead()
 {
     assert(m_pLoop->inLoopThread());
@@ -85,9 +114,21 @@ void TcpConnection::handleRead()
     if (n > 0)
     {
         m_strRecvBuf.append(buf, n);
-        if (m_MsgCb)
+        uint32_t iHeaderLen = 0;
+        std::string strMsg;
+        int32_t iRet = parserMsg(iHeaderLen, strMsg);
+        if (iRet == PACKEAGE_FULL)
         {
-            m_MsgCb(shared_from_this(), m_strRecvBuf);
+            m_strRecvBuf.erase(m_strRecvBuf.begin(), m_strRecvBuf.begin() + iHeaderLen);
+            if (m_MsgCb)
+            {
+                m_MsgCb(shared_from_this(), strMsg);
+            }
+        }
+        else if (iRet == PACKEAGE_ERROR)
+        {
+            LOG_ERROR("tcpconnection recv msg error");
+            m_strRecvBuf.clear();
         }
     }
     else if (n == 0)
