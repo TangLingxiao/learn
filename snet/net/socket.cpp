@@ -32,7 +32,8 @@ InetAddr::InetAddr(const std::string &strIp, uint16_t iPort) : m_oAddr()
     memset(&m_oAddr, 0, sizeof(sockaddr_in));
     m_oAddr.sin_family = AF_INET;
     m_oAddr.sin_port = ::htons(iPort);
-    m_oAddr.sin_addr.s_addr = ::inet_addr(strIp.c_str());
+    //m_oAddr.sin_addr.s_addr = ::inet_addr(strIp.c_str());
+    ::inet_pton(AF_INET,strIp.c_str(), &m_oAddr.sin_addr);
 }
 InetAddr::InetAddr(const InetAddr &oAddr) : m_oAddr(oAddr.m_oAddr)
 {
