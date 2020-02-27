@@ -109,8 +109,219 @@ struct Convertable<T, T>
     };
 };
 
+//U derived from T
 #define SUPERSUBCLASS(T, U) \
     (Convertable<const U *, const T *>::can && !Convertable<const T *, const void *>::same && !Convertable<const T, const U>::same)
+
+template <bool, typename T, typename U>
+struct Select
+{
+    enum
+    {
+        value = 0
+    };
+    using Result = U;
+};
+
+template<typename T, typename U>
+struct Select<true, T, U>
+{
+    enum
+    {
+        value = 1
+    };
+    using Result = T;
+};
+
+template <typename T, typename U>
+class TypeList
+{
+    using HEAD = T;
+    using TAIL = U;
+};
+
+template <typename typelist>
+class Length;
+
+template <typename T, typename U>
+class Length<TypeList<T, U>>
+{
+public:
+    enum
+    {
+        value = 1 + Length<U>::value,
+    };
+};
+template <>
+class Length<NullType>
+{
+public:
+    enum
+    {
+        value = 0,
+    };
+};
+
+template <typename typelist, int index>
+struct TypeAt;
+template <typename T, typename U, int index>
+struct TypeAt<TypeList<T, U>, index>
+{
+    using Type = typename TypeAt<U, index - 1>::Type;
+};
+template <typename T, typename U>
+struct TypeAt<TypeList<T, U>, 0>
+{
+    using Type = T;
+};
+
+template <typename typelist, typename T>
+struct IndexOf;
+
+template <typename HEAD, typename TAIL, typename T>
+struct IndexOf<TypeList<HEAD, TAIL>, T>
+{
+    enum
+    {
+        temp = IndexOf<TAIL, T>::value,
+        value = temp == -1 ? -1 : 1 + temp,
+    };
+};
+template <typename T, typename U>
+struct IndexOf<TypeList<T, U>, T>
+{
+    enum
+    {
+        value = 0
+    };
+};
+
+template <typename typelist, typename T>
+struct Append;
+template <>
+struct Append<NullType, NullType>
+{
+    using Result = NullType;
+};
+template <typename T>
+struct Append<NullType, T>
+{
+    using Result = TypeList<T, NullType>;
+};
+
+template <typename T, typename U>
+struct Append<NullType, TypeList<T, U>>
+{
+    using Result = TypeList<T, U>;
+};
+template <typename HEAD, typename TAIL, typename T>
+struct Append<TypeList<HEAD, TAIL>, T>
+{
+    using Result = TypeList<HEAD, typename Append<TAIL, T>::Result>;
+};
+
+template <typename typelist, typename T>
+struct Erase;
+template <typename T>
+struct Erase<NullType, T>
+{
+    using Result = NullType;
+};
+template <typename HEAD, typename TAIL>
+struct Erase<TypeList<HEAD, TAIL>, HEAD>
+{
+    using Result = TAIL;
+};
+
+template <typename HEAD, typename TAIL, typename T>
+struct Erase<TypeList<HEAD, TAIL>, T>
+{
+    using Result = TypeList<HEAD, typename Erase<TAIL, T>::Result>;
+};
+
+template <typename typelist, typename T>
+struct EraseAll;
+template <typename T>
+struct EraseAll<NullType, T>
+{
+    using Result = NullType;
+};
+template <typename HEAD, typename TAIL>
+struct EraseAll<TypeList<HEAD, TAIL>, HEAD>
+{
+    using Result = typename EraseAll<TAIL, HEAD>::Result;
+};
+
+template <typename HEAD, typename TAIL, typename T>
+struct EraseAll<TypeList<HEAD, TAIL>, T>
+{
+    using Result = TypeList<HEAD, typename EraseAll<TAIL, T>::Result>;
+};
+
+template <typename typelsit, typename T, typename U>
+struct Replace;
+template <typename T, typename U>
+struct Replace<NullType, T, U>
+{
+    using Result = NullType;
+};
+template <typename T, typename TAIL, typename U>
+struct Replace<TypeList<T, TAIL>, T, U>
+{
+    using Result = TypeList<U, TAIL>;
+};
+template <typename HEAD, typename TAIL, typename T, typename U>
+struct Replace<TypeList<HEAD, TAIL>, T, U>
+{
+    using Result = TypeList<HEAD, typename Replace<TAIL, T, U>::Result>;
+};
+
+template <typename typelist, typename T>
+struct MostDerived;
+template<typename T>
+struct MostDerived<NullType, T>
+{
+    using Result = T;
+};
+template <typename HEAD, typename TAIL, typename T>
+struct MostDerived<TypeList<HEAD, TAIL>, T>
+{
+private:
+    using Candidate = typename MostDerived<TAIL, T>::Result;
+
+public:
+    using Result = typename Select<SUPERSUBCLASS(Candidate, HEAD), HEAD, Candidate>::Result;
+};
+
+template <typename typelist>
+struct DerivedToFront;
+
+template<>
+struct DerivedToFront<NullType>
+{
+    using Result = NullType;
+};
+template <typename HEAD, typename TAIL>
+struct DerivedToFront<TypeList<HEAD, TAIL>>
+{
+private:
+    using TheMostDerived = typename MostDerived<TAIL, HEAD>::Result;
+    using Temp = typename Replace<TAIL, TheMostDerived, HEAD>::Result;
+public:
+    using Result = TypeList<TheMostDerived, Temp>;
+};
+
+template <int N>
+struct binary
+{
+    const static int value = binary<N/10>::value*2 + N%10;
+};
+
+template<>
+struct binary<0>
+{
+    const static int value = 0;
+};
 } // namespace util
 
 #endif

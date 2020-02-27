@@ -42,5 +42,18 @@ int main()
     cout << SUPERSUBCLASS(C, B) << endl;
     cout << SUPERSUBCLASS(C, A) << endl;
 #endif
+
+#if 0
+    using typelist = TypeList<char,
+                              TypeList<int,
+                                       TypeList<long, NullType>>>;
+
+    cout << typeid(TypeAt<typelist, 1>::Type).name() << endl;
+    using typelist2 = typename Append<typelist, typelist>::Result;
+    cout << Length<typelist2>::value << endl;
+    cout << Length<typename EraseAll<typelist2, int>::Result>::value << endl;
+    using typelist3 = typename Replace<typelist, int, double>::Result;
+    cout << typeid(TypeAt<typelist3, 1>::Type).name() << endl;
+#endif
     return 0;
 }
