@@ -47,7 +47,7 @@ x64/
 *.log
 CMakeCache.txt
 CMakeFiles/
-# Makefile
+Makefile
 algo
 cmake_install.cmake
 go/src/github.com/*
