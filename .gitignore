@@ -54,3 +54,4 @@ go/src/github.com/*
 go/src/golang.org/*
 go/pkg/*
 go/bin/*
+build/

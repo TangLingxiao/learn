@@ -1,6 +1,6 @@
 #include "LogConsole.h"
 #include <stdio.h>
-
+#include "../Util/TimeHelper.h"
 
 enum Color { 
     BLACK,
@@ -51,5 +51,6 @@ static Color gLogColorArray[LEVEL_MAX] = {
 
 void LogConsole::processLog(LogLevel level, const std::string &log)
 {
-    fprintf(stderr, "\033[%sm%s\n\033[0m", ColorSeq[gLogColorArray[level]], log.c_str());
+    std::string strNow = UtilTime::formatTime(UtilTime::getNow(), "%Y-%m-%d %H:%M:%S|");
+    fprintf(stderr, "\033[%sm%s%s\n\033[0m", ColorSeq[gLogColorArray[level]], strNow.c_str(), log.c_str());
 }
