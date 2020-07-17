@@ -15,7 +15,7 @@ set(CXX_FLAGS
  #-Wold-style-cast
  -Woverloaded-virtual
  -Wpointer-arith
- -Wshadow
+ #-Wshadow
  -Wwrite-strings
  -march=native
  # -MMD
@@ -40,17 +40,24 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Timer/)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Pool/)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Net/)
 INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../Net/Poller)
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/include/hiredis)
 
 link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../build)
-ADD_EXECUTABLE(test_log.out ${CMAKE_CURRENT_SOURCE_DIR}/test_log.cpp)
-ADD_EXECUTABLE(test_async.out ${CMAKE_CURRENT_SOURCE_DIR}/test_async.cpp)
-ADD_EXECUTABLE(test_timer.out ${CMAKE_CURRENT_SOURCE_DIR}/test_timer.cpp)
-target_link_libraries(test_log.out mess)
-target_link_libraries(test_async.out mess)
-target_link_libraries(test_timer.out mess)
+link_directories(${CMAKE_CURRENT_SOURCE_DIR}/../3rdparty/lib)
 
-ADD_EXECUTABLE(test_server.out ${CMAKE_CURRENT_SOURCE_DIR}/test_server.cpp)
-target_link_libraries(test_server.out mess)
+#ADD_EXECUTABLE(test_log.out ${CMAKE_CURRENT_SOURCE_DIR}/test_log.cpp)
+#ADD_EXECUTABLE(test_async.out ${CMAKE_CURRENT_SOURCE_DIR}/test_async.cpp)
+#ADD_EXECUTABLE(test_timer.out ${CMAKE_CURRENT_SOURCE_DIR}/test_timer.cpp)
+#target_link_libraries(test_log.out mess)
+#target_link_libraries(test_async.out mess)
+#target_link_libraries(test_timer.out mess)
+#
+#ADD_EXECUTABLE(test_server.out ${CMAKE_CURRENT_SOURCE_DIR}/test_server.cpp)
+#target_link_libraries(test_server.out mess)
+#
+#ADD_EXECUTABLE(test_client.out ${CMAKE_CURRENT_SOURCE_DIR}/test_client.cpp)
+#target_link_libraries(test_client.out mess)
 
-ADD_EXECUTABLE(test_client.out ${CMAKE_CURRENT_SOURCE_DIR}/test_client.cpp)
-target_link_libraries(test_client.out mess)
+
+ADD_EXECUTABLE(test_redis.out ${CMAKE_CURRENT_SOURCE_DIR}/test_redis.cpp)
+target_link_libraries(test_redis.out mess hiredis)

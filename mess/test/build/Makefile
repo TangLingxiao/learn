@@ -102,189 +102,41 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named test_async.out
+# Target rules for targets named test_redis.out
 
 # Build rule for target.
-test_async.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_async.out
-.PHONY : test_async.out
+test_redis.out: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_redis.out
+.PHONY : test_redis.out
 
 # fast build rule for target.
-test_async.out/fast:
-	$(MAKE) -f CMakeFiles/test_async.out.dir/build.make CMakeFiles/test_async.out.dir/build
-.PHONY : test_async.out/fast
+test_redis.out/fast:
+	$(MAKE) -f CMakeFiles/test_redis.out.dir/build.make CMakeFiles/test_redis.out.dir/build
+.PHONY : test_redis.out/fast
 
-#=============================================================================
-# Target rules for targets named test_client.out
-
-# Build rule for target.
-test_client.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_client.out
-.PHONY : test_client.out
-
-# fast build rule for target.
-test_client.out/fast:
-	$(MAKE) -f CMakeFiles/test_client.out.dir/build.make CMakeFiles/test_client.out.dir/build
-.PHONY : test_client.out/fast
-
-#=============================================================================
-# Target rules for targets named test_log.out
-
-# Build rule for target.
-test_log.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_log.out
-.PHONY : test_log.out
-
-# fast build rule for target.
-test_log.out/fast:
-	$(MAKE) -f CMakeFiles/test_log.out.dir/build.make CMakeFiles/test_log.out.dir/build
-.PHONY : test_log.out/fast
-
-#=============================================================================
-# Target rules for targets named test_server.out
-
-# Build rule for target.
-test_server.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_server.out
-.PHONY : test_server.out
-
-# fast build rule for target.
-test_server.out/fast:
-	$(MAKE) -f CMakeFiles/test_server.out.dir/build.make CMakeFiles/test_server.out.dir/build
-.PHONY : test_server.out/fast
-
-#=============================================================================
-# Target rules for targets named test_timer.out
-
-# Build rule for target.
-test_timer.out: cmake_check_build_system
-	$(MAKE) -f CMakeFiles/Makefile2 test_timer.out
-.PHONY : test_timer.out
-
-# fast build rule for target.
-test_timer.out/fast:
-	$(MAKE) -f CMakeFiles/test_timer.out.dir/build.make CMakeFiles/test_timer.out.dir/build
-.PHONY : test_timer.out/fast
-
-test_async.o: test_async.cpp.o
-.PHONY : test_async.o
+test_redis.o: test_redis.cpp.o
+.PHONY : test_redis.o
 
 # target to build an object file
-test_async.cpp.o:
-	$(MAKE) -f CMakeFiles/test_async.out.dir/build.make CMakeFiles/test_async.out.dir/test_async.cpp.o
-.PHONY : test_async.cpp.o
+test_redis.cpp.o:
+	$(MAKE) -f CMakeFiles/test_redis.out.dir/build.make CMakeFiles/test_redis.out.dir/test_redis.cpp.o
+.PHONY : test_redis.cpp.o
 
-test_async.i: test_async.cpp.i
-.PHONY : test_async.i
-
-# target to preprocess a source file
-test_async.cpp.i:
-	$(MAKE) -f CMakeFiles/test_async.out.dir/build.make CMakeFiles/test_async.out.dir/test_async.cpp.i
-.PHONY : test_async.cpp.i
-
-test_async.s: test_async.cpp.s
-.PHONY : test_async.s
-
-# target to generate assembly for a file
-test_async.cpp.s:
-	$(MAKE) -f CMakeFiles/test_async.out.dir/build.make CMakeFiles/test_async.out.dir/test_async.cpp.s
-.PHONY : test_async.cpp.s
-
-test_client.o: test_client.cpp.o
-.PHONY : test_client.o
-
-# target to build an object file
-test_client.cpp.o:
-	$(MAKE) -f CMakeFiles/test_client.out.dir/build.make CMakeFiles/test_client.out.dir/test_client.cpp.o
-.PHONY : test_client.cpp.o
-
-test_client.i: test_client.cpp.i
-.PHONY : test_client.i
+test_redis.i: test_redis.cpp.i
+.PHONY : test_redis.i
 
 # target to preprocess a source file
-test_client.cpp.i:
-	$(MAKE) -f CMakeFiles/test_client.out.dir/build.make CMakeFiles/test_client.out.dir/test_client.cpp.i
-.PHONY : test_client.cpp.i
+test_redis.cpp.i:
+	$(MAKE) -f CMakeFiles/test_redis.out.dir/build.make CMakeFiles/test_redis.out.dir/test_redis.cpp.i
+.PHONY : test_redis.cpp.i
 
-test_client.s: test_client.cpp.s
-.PHONY : test_client.s
-
-# target to generate assembly for a file
-test_client.cpp.s:
-	$(MAKE) -f CMakeFiles/test_client.out.dir/build.make CMakeFiles/test_client.out.dir/test_client.cpp.s
-.PHONY : test_client.cpp.s
-
-test_log.o: test_log.cpp.o
-.PHONY : test_log.o
-
-# target to build an object file
-test_log.cpp.o:
-	$(MAKE) -f CMakeFiles/test_log.out.dir/build.make CMakeFiles/test_log.out.dir/test_log.cpp.o
-.PHONY : test_log.cpp.o
-
-test_log.i: test_log.cpp.i
-.PHONY : test_log.i
-
-# target to preprocess a source file
-test_log.cpp.i:
-	$(MAKE) -f CMakeFiles/test_log.out.dir/build.make CMakeFiles/test_log.out.dir/test_log.cpp.i
-.PHONY : test_log.cpp.i
-
-test_log.s: test_log.cpp.s
-.PHONY : test_log.s
+test_redis.s: test_redis.cpp.s
+.PHONY : test_redis.s
 
 # target to generate assembly for a file
-test_log.cpp.s:
-	$(MAKE) -f CMakeFiles/test_log.out.dir/build.make CMakeFiles/test_log.out.dir/test_log.cpp.s
-.PHONY : test_log.cpp.s
-
-test_server.o: test_server.cpp.o
-.PHONY : test_server.o
-
-# target to build an object file
-test_server.cpp.o:
-	$(MAKE) -f CMakeFiles/test_server.out.dir/build.make CMakeFiles/test_server.out.dir/test_server.cpp.o
-.PHONY : test_server.cpp.o
-
-test_server.i: test_server.cpp.i
-.PHONY : test_server.i
-
-# target to preprocess a source file
-test_server.cpp.i:
-	$(MAKE) -f CMakeFiles/test_server.out.dir/build.make CMakeFiles/test_server.out.dir/test_server.cpp.i
-.PHONY : test_server.cpp.i
-
-test_server.s: test_server.cpp.s
-.PHONY : test_server.s
-
-# target to generate assembly for a file
-test_server.cpp.s:
-	$(MAKE) -f CMakeFiles/test_server.out.dir/build.make CMakeFiles/test_server.out.dir/test_server.cpp.s
-.PHONY : test_server.cpp.s
-
-test_timer.o: test_timer.cpp.o
-.PHONY : test_timer.o
-
-# target to build an object file
-test_timer.cpp.o:
-	$(MAKE) -f CMakeFiles/test_timer.out.dir/build.make CMakeFiles/test_timer.out.dir/test_timer.cpp.o
-.PHONY : test_timer.cpp.o
-
-test_timer.i: test_timer.cpp.i
-.PHONY : test_timer.i
-
-# target to preprocess a source file
-test_timer.cpp.i:
-	$(MAKE) -f CMakeFiles/test_timer.out.dir/build.make CMakeFiles/test_timer.out.dir/test_timer.cpp.i
-.PHONY : test_timer.cpp.i
-
-test_timer.s: test_timer.cpp.s
-.PHONY : test_timer.s
-
-# target to generate assembly for a file
-test_timer.cpp.s:
-	$(MAKE) -f CMakeFiles/test_timer.out.dir/build.make CMakeFiles/test_timer.out.dir/test_timer.cpp.s
-.PHONY : test_timer.cpp.s
+test_redis.cpp.s:
+	$(MAKE) -f CMakeFiles/test_redis.out.dir/build.make CMakeFiles/test_redis.out.dir/test_redis.cpp.s
+.PHONY : test_redis.cpp.s
 
 # Help Target
 help:
@@ -294,26 +146,10 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... test_async.out"
-	@echo "... test_client.out"
-	@echo "... test_log.out"
-	@echo "... test_server.out"
-	@echo "... test_timer.out"
-	@echo "... test_async.o"
-	@echo "... test_async.i"
-	@echo "... test_async.s"
-	@echo "... test_client.o"
-	@echo "... test_client.i"
-	@echo "... test_client.s"
-	@echo "... test_log.o"
-	@echo "... test_log.i"
-	@echo "... test_log.s"
-	@echo "... test_server.o"
-	@echo "... test_server.i"
-	@echo "... test_server.s"
-	@echo "... test_timer.o"
-	@echo "... test_timer.i"
-	@echo "... test_timer.s"
+	@echo "... test_redis.out"
+	@echo "... test_redis.o"
+	@echo "... test_redis.i"
+	@echo "... test_redis.s"
 .PHONY : help
 
 
