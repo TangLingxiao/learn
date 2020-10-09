@@ -93,6 +93,8 @@ const char *briefFileName(const char *name);
         }                                    \
     } while (0)
 
+
+#define LOG_TRACE(x) LOG_WITH_LEVELCHECK(LEVEL_TRACE, "TRACE|" << x)
 #define LOG_DEBUG(x) LOG_WITH_LEVELCHECK(LEVEL_DEBUG, "DEBUG|" << x)
 #define LOG_INFO(x) LOG_WITH_LEVELCHECK(LEVEL_INFO, "INFO|" << x)
 #define LOG_WARN(x) LOG_WITH_LEVELCHECK(LEVEL_WARN, "WARN|" << x)

@@ -19,7 +19,7 @@ TcpConnection::TcpConnection(EventLoop *loop, int32_t fd, const std::string &cna
 
 TcpConnection::~TcpConnection()
 {
-    LOG_DEBUG("TcpConnection released,name:" << _name);
+    LOG_TRACE("TcpConnection released,name:" << _name);
 }
 
 void TcpConnection::setCloseCb(ConnectionCb cb)

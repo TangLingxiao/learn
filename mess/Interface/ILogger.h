@@ -4,6 +4,7 @@
 
 enum LogLevel
 {
+    LEVEL_TRACE,
     LEVEL_DEBUG,
     LEVEL_INFO,
     LEVEL_WARN,

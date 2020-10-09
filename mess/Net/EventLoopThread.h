@@ -19,5 +19,5 @@ private:
     std::thread _thread;
     std::mutex _mtx;
     std::condition_variable _cond;
-    EventLoop *_loop;
+    EventLoop *_loop{nullptr};
 };

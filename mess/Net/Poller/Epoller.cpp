@@ -83,11 +83,11 @@ size_t Epoller::poll(int64_t timeout, ChannelList *activeChannels)
         {
             _epollFds.resize(2 * _epollFds.size());
         }
-        LOG_DEBUG(nums << " events happened");
+        LOG_TRACE(nums << " events happened");
     }
     else if (nums == 0)
     {
-        LOG_DEBUG("nothing happened");
+        LOG_TRACE("nothing happened");
     }
     else
     {
@@ -109,6 +109,6 @@ void Epoller::update(int32_t opt, Channel *channel)
     }
     else
     {
-        LOG_DEBUG("epoll_ctl success, opt:" << getEpollDes(opt));
+        LOG_TRACE("epoll_ctl success, opt:" << getEpollDes(opt));
     }
 }

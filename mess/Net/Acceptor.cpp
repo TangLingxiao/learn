@@ -38,7 +38,7 @@ void Acceptor::handleRead()
         if (_cb)
         {
             _cb(fd, addr);
-            LOG_DEBUG("new connection, " << addr.toString());
+            LOG_TRACE("new connection, " << addr.toString());
         }
         else
         {

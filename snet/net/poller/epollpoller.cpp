@@ -30,12 +30,12 @@ uint32_t EPollPoller::poll(int32_t timeout, ChannelList *activeChannels)
         {
             m_vEpollfds.resize(2 * m_vEpollfds.size());
         }
-        LOG_INFO(iNums << " events happened");
+        LOG_TRACE(iNums << " events happened");
         fillActiveChannels(iNums, activeChannels);
     }
     else if (iNums == 0)
     {
-        LOG_INFO("nothing happened");
+        LOG_TRACE("nothing happened");
     }
     else
     {
@@ -95,7 +95,7 @@ void EPollPoller::update(int32_t iOp, Channel *channel)
     }
     else
     {
-        LOG_INFO("epoll ctl, op: " << getEpollDes(iOp));
+        LOG_TRACE("epoll ctl, op: " << getEpollDes(iOp));
     }
 }
 void EPollPoller::fillActiveChannels(int32_t iEvents, ChannelList *activeChannels) const
